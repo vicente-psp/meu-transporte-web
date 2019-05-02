@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 
 // Import your library
 import { NgFloatingActionMenuModule } from 'ng-floating-action-menu';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { NgFloatingActionMenuModule } from 'ng-floating-action-menu';
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
 
     // Specify your library as an import
     NgFloatingActionMenuModule,
