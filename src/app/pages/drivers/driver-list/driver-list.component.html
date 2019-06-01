@@ -1,0 +1,36 @@
+<app-bread-crumb [itens]="[{text: 'Motoristas'}]"></app-bread-crumb>
+
+<app-page-header
+  page-title="Motoristas"
+  button-text="+ Novo Motorista"
+  button-link="new"
+  button-class="btn-success"
+></app-page-header>
+
+<table class="table table-hover">
+  <thead>
+    <tr class="bg-primary text-light">
+      <th>Motorista</th>
+      <th>CNH</th>
+      <th>CPF</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let resource of resources">
+      <td>
+        <strong>{{ resource.name }}</strong>
+      </td>
+      <td>
+        <strong>{{ resource.cnh }}</strong>
+      </td>
+      <td>
+        <strong>{{ resource.cpf }}</strong>
+      </td>
+      <td>
+        <a [routerLink]="[resource.id, 'edit']" class="btn btn-outline-info btn-sm mr-2">Editar</a>
+        <button (click)="deleteResource(resource)" class="btn btn-outline-danger btn-sm">Excluir</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
