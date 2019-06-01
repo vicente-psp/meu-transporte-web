@@ -1,11 +1,11 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import { Vehicle } from './pages/vehicles/shared/vehicle';
+import { Driver } from './pages/drivers/shared/driver.model';
  
 export class InMemoryDatabase implements InMemoryDbService {
   createDb() {
-    let vehicles: Vehicle[] = [
-      { id: 1, description: 'Gol', plate: 'NMZ-7776' },
+    let drivers: Driver[] = [
+      { id: 1, name: 'João Paulo', cnh: '2353423', cpf: '1234563211' },
     ];
-    return {vehicles};
+    return {drivers};
   }
 }
