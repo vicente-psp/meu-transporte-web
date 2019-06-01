@@ -1,0 +1,49 @@
+<app-bread-crumb
+  [itens]="[{text: 'Motoristas', link: '/drivers'}, {text: pageTitle}]"
+></app-bread-crumb>
+
+<app-page-header
+  [page-title]="pageTitle"
+  button-text="<< Voltar"
+  button-link="/drivers"
+  button-class="btn-light"
+></app-page-header>
+
+<form [formGroup]="resourceForm" (submit)="submitForm()">
+  <div class="card">
+    <div class="card-header">
+      Informações sobre o motorista
+    </div>
+    <div class="card-body">
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label for="name">Nome</label>
+          <input type="text" class="form-control" id="name" formControlName="name">
+          <app-form-field-error [form-control]="resourceForm.get('name')"></app-form-field-error>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="cnh">CNH</label>
+          <input type="text" class="form-control" id="cnh" formControlName="cnh">
+          <app-form-field-error [form-control]="resourceForm.get('cnh')"></app-form-field-error>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="cpf">CPF</label>
+          <input type="text" class="form-control" id="cpf" formControlName="cpf">
+          <app-form-field-error [form-control]="resourceForm.get('cpf')"></app-form-field-error>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="phone">Telefone</label>
+          <input type="text" class="form-control" id="phone" formControlName="phone">
+          <app-form-field-error [form-control]="resourceForm.get('phone')"></app-form-field-error>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-server-error-messages [server-error-messages]="serverErrorMessages"></app-server-error-messages>
+  
+  <button pButton type="submit" label="Success"
+    class="ui-button-success mt-2 float-right"
+    label="Salvar" icon="pi pi-check"
+    [disabled]="submittingForm || resourceForm.invalid"></button>
+</form>
