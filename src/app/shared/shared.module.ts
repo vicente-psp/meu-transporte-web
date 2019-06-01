@@ -7,11 +7,14 @@ import { PageHeaderComponent } from './components/page-header/page-header.compon
 import { FormFieldErrorComponent } from './components/form-field-error/form-field-error.component';
 import { ServerErrorMessagesComponent } from './components/server-error-messages/server-error-messages.component';
 
+import { ButtonModule } from 'primeng/button';
+
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    ButtonModule
   ],
   declarations: [
     BreadCrumbComponent,
@@ -26,7 +29,8 @@ import { ServerErrorMessagesComponent } from './components/server-error-messages
     RouterModule,
     PageHeaderComponent,
     FormFieldErrorComponent,
-    ServerErrorMessagesComponent
+    ServerErrorMessagesComponent,
+    ButtonModule
   ]
 })
 export class SharedModule { }
