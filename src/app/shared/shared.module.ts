@@ -2,10 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-
+import { FormsModule } from '@angular/forms';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 import { BreadCrumbComponent } from './components/bread-crumb/bread-crumb.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
@@ -31,6 +35,11 @@ import { CardModule } from 'primeng/card';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    FormsModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   declarations: [
     BreadCrumbComponent,
@@ -53,6 +62,11 @@ import { CardModule } from 'primeng/card';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    FormsModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ]
 })
 export class SharedModule { }
