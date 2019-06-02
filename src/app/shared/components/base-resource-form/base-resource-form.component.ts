@@ -16,7 +16,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     pageTitle: string;
     serverErrorMessages: string[] = null;
     submittingForm: boolean = false;
-
+    
     protected route: ActivatedRoute;
     protected router: Router;
     protected formBuilder: FormBuilder;
@@ -34,7 +34,6 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
 
     ngOnInit() {
         this.setCurrentAction();
-        this.buildResourceForm();
         this.loadResource();
     }
 
@@ -43,26 +42,28 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     }
 
     submitForm() {
-        this.submittingForm = true;
-
-        if (this.currentAction === 'new') {
-            this.createResource();
-        } else {
-            this.updateResource();
+        if (this.isValidResource()) {
+            if (this.currentAction === 'cadastrar') {
+                this.createResource();
+            } else {
+                this.updateResource();
+            }
         }
     }
 
+    protected abstract isValidResource(): boolean;
+
 
     protected setCurrentAction() {
-        if (this.route.snapshot.url[0].path === 'new') {
-            this.currentAction = 'new';
+        if (this.route.snapshot.url[0].path === 'cadastrar') {
+            this.currentAction = 'cadastrar';
         } else {
-            this.currentAction = 'edit';
+            this.currentAction = 'editar';
         }
     }
 
     protected loadResource() {
-        if (this.currentAction === 'edit') {
+        if (this.currentAction === 'editar') {
             this.route.paramMap.pipe(
                 switchMap(params => this.resourceService.getById(+params.get('id')))
             )
@@ -76,7 +77,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     }
 
     protected setPageTitle() {
-        if (this.currentAction === 'new') {
+        if (this.currentAction === 'cadastrar') {
             this.pageTitle = this.createPageTitle();
         } else {
             this.pageTitle = this.editionPageTitle();
@@ -103,7 +104,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
 
         const baseComponentPath: string = this.route.snapshot.parent.url[0].path;
         this.router.navigateByUrl(baseComponentPath, { skipLocationChange: true }).then(
-            () => this.router.navigate([baseComponentPath, resource.id, 'edit'])
+            () => this.router.navigate([baseComponentPath, 'editar', resource.id])
         )
     }
 
@@ -120,14 +121,12 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     }
 
     protected createPageTitle(): string {
-        return 'Novo';
+        return 'Cadastrar';
     }
 
     protected editionPageTitle(): string {
-        return 'Edição';
+        return 'Editar';
     }
-
-    protected abstract buildResourceForm(): void;
 
     protected isNullOrUndefined(obj: any): boolean {
         return isNullOrUndefined(obj);
@@ -146,4 +145,29 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
       }
       return null;
     }
+
+    protected clearInput(input: string): void {
+      if (this.isStringValid(input)) {
+        this.resource[input] = '';
+      }
+    }
+  
+    protected isTextInputValid(text: string): boolean {
+      if (this.isStringValid(text)) {
+        return true;
+      }
+      return false;
+    }
+    
+    /**
+     * Verifica se existe texto válido na string
+     * @param value 
+     */
+    protected isStringValid(value: string): boolean {
+      if (!this.isNullOrUndefined(value) && value.length > 0) {
+        return true;
+      }
+      return false;
+    }
+
 }
