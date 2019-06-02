@@ -2,109 +2,86 @@
   [itens]="[{text: 'Motoristas', link: '/drivers'}, {text: pageTitle}]"
 ></app-bread-crumb>
 
-<app-page-header
+<!-- <app-page-header
   [page-title]="pageTitle"
   button-text="<< Voltar"
   button-link="/drivers"
   button-class="btn-light"
-></app-page-header>
+></app-page-header> -->
 
 
-
-<div class="col-md-12">
-<mat-form-field appearance="outline">
-  <mat-label>Outline form field</mat-label>
-  <input matInput placeholder="Placeholder">
-  <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-</mat-form-field>
-</div>
-
-
-
-
-
-<!-- <p-panel>
-  <p-header>
-      Informações sobre o motorista
-  </p-header>
-  <div class="row mt-3 mb-2">
-    <div class="col-md-12">
-      <span class="ui-float-label" style="display: flex;">
-        <input id="float-input" type="text" style="width: 100%;" pInputText> 
-        <label for="float-input">Nome</label>
-      </span>
-    </div>
-  </div>
-    
-  <div class="row mt-4 mb-2">
-    <div class="col-md-3">
-      <span class="ui-float-label" style="display: flex;">
-        <input id="float-input" type="text" style="width: 100%;" pInputText> 
-        <label for="float-input">CNH</label>
-      </span>
-    </div>
-    
-    <div class="col-md-3">
-      <span class="ui-float-label" style="display: flex;">
-        <input id="float-input" type="text" style="width: 100%;" pInputText> 
-        <label for="float-input">CPF</label>
-      </span>
-    </div>
-    
-    <div class="col-md-3">
-      <span class="ui-float-label" style="display: flex;">
-        <input id="float-input" type="text" style="width: 100%;" pInputText> 
-        <label for="float-input">Telefone</label>
-      </span>
-    </div>
-  </div>
-
-  <p-footer>
-    Footer content here
-  </p-footer>
-</p-panel> -->
-<button pButton type="submit" label="Success"
-  class="ui-button-success mt-2 float-right"
-  label="Salvar" icon="pi pi-check"
-  [disabled]="submittingForm || resourceForm.invalid"></button>
-
-<!-- <form [formGroup]="resourceForm" (submit)="submitForm()">
-  <div class="card">
-    <div class="card-header">
-      Informações sobre o motorista
-    </div>
-
-
-    <div class="card-body">
-      <div class="form-row">      
-        <div class="form-group col-md-12">
-          <label for="name">Nome</label>
-          <input type="text" class="form-control" id="name" formControlName="name">
-          <app-form-field-error [form-control]="resourceForm.get('name')"></app-form-field-error>
-        </div>
-        <div class="form-group col-md-3">
-          <label for="cnh">CNH</label>
-          <input type="text" class="form-control" id="cnh" formControlName="cnh">
-          <app-form-field-error [form-control]="resourceForm.get('cnh')"></app-form-field-error>
-        </div>
-        <div class="form-group col-md-3">
-          <label for="cpf">CPF</label>
-          <input type="text" class="form-control" id="cpf" formControlName="cpf">
-          <app-form-field-error [form-control]="resourceForm.get('cpf')"></app-form-field-error>
-        </div>
-        <div class="form-group col-md-3">
-          <label for="phone">Telefone</label>
-          <input type="text" class="form-control" id="phone" formControlName="phone">
-          <app-form-field-error [form-control]="resourceForm.get('phone')"></app-form-field-error>
-        </div>
+<mat-drawer-container style="width: 100%;">
+    <div class="row" style="margin-left: 10px; margin-right: 10px; margin-top: 15px;">
+      <div class="col-md-12">
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label for="name">Nome</mat-label>  
+          <input matInput [(ngModel)]="resource.name" required>
+          <button *ngIf="isTextInput(resource.name)"
+              mat-icon-button matSuffix (click)="clearInput('name')">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-form-field>
+        <!-- <app-form-field-error [form-control]="resourceForm.get('name')"></app-form-field-error> -->
       </div>
     </div>
-  </div>
 
-  <app-server-error-messages [server-error-messages]="serverErrorMessages"></app-server-error-messages>
-  
-  <button pButton type="submit" label="Success"
-    class="ui-button-success mt-2 float-right"
-    label="Salvar" icon="pi pi-check"
-    [disabled]="submittingForm || resourceForm.invalid"></button>
-</form> -->
+    <div class="row" style="margin-left: 10px; margin-right: 10px;">
+      <div class="col-md-3">
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label for="dateOfBirth">Data nascimento</mat-label> 
+            <input matInput [(ngModel)]="resource.dateOfBirth" [max]="maxDate" [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        <!-- <app-form-field-error [form-control]="resourceForm.get('dateOfBirth')"></app-form-field-error> -->
+      </div>
+
+      <div class="col-md-3">
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label for="cnh">CNH</mat-label>  
+          <input matInput [imask]="cnhMask" [(ngModel)]="resource.cnh">
+          <!-- <button *ngIf="isTextInput(resourceForm.get('cnh').value)"
+              mat-icon-button matSuffix (click)="clearInput('cnh')">
+            <mat-icon>clear</mat-icon>
+          </button> -->
+        </mat-form-field>
+        <!-- <app-form-field-error [form-control]="resourceForm.get('cnh')"></app-form-field-error> -->
+      </div>
+      <div class="col-md-3">
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label for="cpf">CPF</mat-label>  
+          <input matInput [imask]="cpfMask" [(ngModel)]="resource.cpf">
+          <!-- <button *ngIf="isTextInput(resourceForm.get('cpf').value)"
+              mat-icon-button matSuffix (click)="clearInput('cpf')">
+            <mat-icon>clear</mat-icon>
+          </button> -->
+        </mat-form-field>
+        <!-- <app-form-field-error [form-control]="resourceForm.get('cpf')"></app-form-field-error> -->
+      </div>
+      <div class="col-md-3">
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label for="phone">Telefone</mat-label>  
+          <input matInput [imask]="phoneMask" [(ngModel)]="resource.cpf">
+          <!-- <button *ngIf="isTextInput(resourceForm.get('phone').value)"
+              mat-icon-button matSuffix (click)="clearInput('phone')">
+            <mat-icon>clear</mat-icon>
+          </button> -->
+        </mat-form-field>
+        <!-- <app-form-field-error [form-control]="resourceForm.get('phone')"></app-form-field-error> -->
+      </div>
+    </div>
+  <!-- </form> -->
+</mat-drawer-container>
+
+<button mat-raised-button type="button"
+  [routerLink]="'/drivers'" style="margin-right: 15px;"
+  class="mt-2 float-right">
+  <mat-icon>chevron_left</mat-icon>
+  Voltar
+</button>
+<button mat-raised-button type="button" style="margin-right: 15px;"
+  class="mt-2 float-right" [color]="'primary'" (click)="submitForm()"
+  [disabled]="submittingForm ">
+  <mat-icon>check</mat-icon>
+  Salvar
+</button>
