@@ -2,8 +2,8 @@
 
 <app-page-header
   page-title="Motoristas"
-  button-text="+ Novo Motorista"
-  button-link="new"
+  button-text="+ Cadastrar"
+  button-link="cadastrar"
   button-class="btn-success"
 ></app-page-header>
 
@@ -28,7 +28,7 @@
         <strong>{{ resource.cpf }}</strong>
       </td>
       <td>
-        <a [routerLink]="[resource.id, 'edit']" class="btn btn-outline-info btn-sm mr-2">Editar</a>
+        <a [routerLink]="['editar', resource.id]" class="btn btn-outline-info btn-sm mr-2">Editar</a>
         <button (click)="deleteResource(resource)" class="btn btn-outline-danger btn-sm">Excluir</button>
       </td>
     </tr>
