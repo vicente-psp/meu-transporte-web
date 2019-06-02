@@ -8,11 +8,12 @@ import { BaseResourceService } from '../../services/base-resource.service';
 import { switchMap } from 'rxjs/operators';
 
 import toastr from 'toastr';
+import { resource } from 'selenium-webdriver/http';
 
 export abstract class BaseResourceFormComponent<T extends BaseResourceModel> implements OnInit, AfterContentChecked {
 
     currentAction: string;
-    resourceForm: FormGroup;
+    // resourceForm: FormGroup;
     pageTitle: string;
     serverErrorMessages: string[] = null;
     submittingForm: boolean = false;
@@ -20,6 +21,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     protected route: ActivatedRoute;
     protected router: Router;
     protected formBuilder: FormBuilder;
+    // protected entity: T;
 
     constructor(
         protected injector: Injector,
@@ -68,8 +70,9 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
             )
                 .subscribe(
                     (resource) => {
+                        // this.entity = resource;
                         this.resource = resource;
-                        this.resourceForm.patchValue(this.resource);
+                        // this.resourceForm.patchValue(this.resource);
                     },
                     (error) => alert('Ocorreu um erro no servidor')
                 )
@@ -85,15 +88,15 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     }
 
     protected createResource() {
-        const resource: T = this.jsonDataToResourcefn(this.resourceForm.value);
-        this.resourceService.create(resource).subscribe(
+        // const resource: T = this.jsonDataToResourcefn(this.entity);        
+        this.resourceService.create(this.resource).subscribe(
             resource => this.actionsForSuccess(resource),
             error => this.actionsForError(error)
         )
     }
 
     protected updateResource() {
-        const resource: T = this.jsonDataToResourcefn(this.resourceForm.value);
+        const resource: T = this.jsonDataToResourcefn(this.resource);
         this.resourceService.update(resource).subscribe(
             resource => this.actionsForSuccess(resource),
             error => this.actionsForError(error)
