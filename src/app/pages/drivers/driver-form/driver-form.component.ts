@@ -4,7 +4,6 @@ import { BaseResourceFormComponent } from 'src/app/shared/components/base-resour
 
 import { Driver } from '../shared/driver.model';
 import { DriverService } from '../shared/driver.service';
-import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-driver-form',
@@ -30,48 +29,23 @@ export class DriverFormComponent extends BaseResourceFormComponent<Driver> {
     this.maxDate = new Date(new Date().getFullYear() - 18, new Date().getMonth() + 1, new Date().getDate());
   }
 
-  protected buildResourceForm() {
+  salvar(): void {
+    this.submitForm();
   }
 
-  protected createPageTitle(): string {
-    return 'Cadastro de motorista';
-  }
-
-  protected editionPageTitle(): string {
-    const driverName = this.resource.name || '';
-    return 'Editando motorista: ' + driverName;
-  }
-
-
-  clearInput(input: string): void {
-    if (this.isStringValid(input)) {
-      this.resource[input] = '';
-    }
-  }
-
-  isTextInputValid(text: string): boolean {
-    if (this.isStringValid(text)) {
+  protected isValidResource(): boolean {
+    if (this.resource.name) {
       return true;
     }
     return false;
   }
-
-  convertDate(event: any): void {
+  
+  convertToDate(event: any): void {
     if(!this.isNullOrUndefined(event.srcElement.value)) {
       const str = event.srcElement.value;
       this.resource.dateOfBirth = this.convertDateUSFromStringBr(str.split("/"));
+      console.log(this.resource.dateOfBirth);
     }
-  }
-  
-  /**
-   * Verifica se existe texto válido na string
-   * @param value 
-   */
-  isStringValid(value: string): boolean {
-    if (!this.isNullOrUndefined(value) && value.length > 0) {
-      return true;
-    }
-    return false;
   }
 
 }
