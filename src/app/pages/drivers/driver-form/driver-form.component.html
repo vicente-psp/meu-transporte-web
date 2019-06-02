@@ -1,11 +1,11 @@
 <app-bread-crumb
-  [itens]="[{text: 'Motoristas', link: '/drivers'}, {text: pageTitle}]"
+  [itens]="[{text: 'Motoristas', link: '/motoristas'}, {text: pageTitle}]"
 ></app-bread-crumb>
 
 <!-- <app-page-header
   [page-title]="pageTitle"
   button-text="<< Voltar"
-  button-link="/drivers"
+  button-link="/motoristas"
   button-class="btn-light"
 ></app-page-header> -->
 
@@ -16,7 +16,7 @@
         <mat-form-field appearance="outline" style="width: 100%;">
           <mat-label for="name">Nome</mat-label>  
           <input matInput [(ngModel)]="resource.name" required>
-          <button *ngIf="isTextInput(resource.name)"
+          <button *ngIf="isTextInputValid(resource.name)"
               mat-icon-button matSuffix (click)="clearInput('name')">
             <mat-icon>clear</mat-icon>
           </button>
@@ -29,7 +29,8 @@
       <div class="col-md-3">
           <mat-form-field appearance="outline" style="width: 100%;">
             <mat-label for="dateOfBirth">Data nascimento</mat-label> 
-            <input matInput [(ngModel)]="resource.dateOfBirth" [max]="maxDate" [matDatepicker]="picker">
+            <input matInput [(ngModel)]="resource.dateOfBirth" (change)="convertDateUSFromStringBr($event)"
+              [max]="maxDate" [matDatepicker]="picker" required>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
@@ -39,42 +40,41 @@
       <div class="col-md-3">
         <mat-form-field appearance="outline" style="width: 100%;">
           <mat-label for="cnh">CNH</mat-label>  
-          <input matInput [imask]="cnhMask" [(ngModel)]="resource.cnh">
-          <!-- <button *ngIf="isTextInput(resourceForm.get('cnh').value)"
+          <input matInput [imask]="cnhMask" [(ngModel)]="resource.cnh" required>
+          <button *ngIf="isTextInputValid(resource.cnh)"
               mat-icon-button matSuffix (click)="clearInput('cnh')">
             <mat-icon>clear</mat-icon>
-          </button> -->
+          </button>
         </mat-form-field>
         <!-- <app-form-field-error [form-control]="resourceForm.get('cnh')"></app-form-field-error> -->
       </div>
       <div class="col-md-3">
         <mat-form-field appearance="outline" style="width: 100%;">
           <mat-label for="cpf">CPF</mat-label>  
-          <input matInput [imask]="cpfMask" [(ngModel)]="resource.cpf">
-          <!-- <button *ngIf="isTextInput(resourceForm.get('cpf').value)"
+          <input matInput [imask]="cpfMask" [(ngModel)]="resource.cpf" required>
+          <button *ngIf="isTextInputValid(resource.cpf)"
               mat-icon-button matSuffix (click)="clearInput('cpf')">
             <mat-icon>clear</mat-icon>
-          </button> -->
+          </button>
         </mat-form-field>
         <!-- <app-form-field-error [form-control]="resourceForm.get('cpf')"></app-form-field-error> -->
       </div>
       <div class="col-md-3">
         <mat-form-field appearance="outline" style="width: 100%;">
           <mat-label for="phone">Telefone</mat-label>  
-          <input matInput [imask]="phoneMask" [(ngModel)]="resource.telefone">
-          <!-- <button *ngIf="isTextInput(resourceForm.get('phone').value)"
+          <input matInput [imask]="phoneMask" [(ngModel)]="resource.phone" required>
+          <button *ngIf="isTextInputValid(resource.phone)"
               mat-icon-button matSuffix (click)="clearInput('phone')">
             <mat-icon>clear</mat-icon>
-          </button> -->
+          </button>
         </mat-form-field>
         <!-- <app-form-field-error [form-control]="resourceForm.get('phone')"></app-form-field-error> -->
       </div>
     </div>
-  <!-- </form> -->
 </mat-drawer-container>
 
 <button mat-raised-button type="button"
-  [routerLink]="'/drivers'" style="margin-right: 15px;"
+  [routerLink]="'/motoristas'" style="margin-right: 15px;"
   class="mt-2 float-right">
   <mat-icon>chevron_left</mat-icon>
   Voltar

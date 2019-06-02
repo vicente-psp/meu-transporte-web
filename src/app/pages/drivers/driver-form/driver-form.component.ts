@@ -49,11 +49,18 @@ export class DriverFormComponent extends BaseResourceFormComponent<Driver> {
     }
   }
 
-  isTextInput(text: string): boolean {
+  isTextInputValid(text: string): boolean {
     if (this.isStringValid(text)) {
       return true;
     }
     return false;
+  }
+
+  convertDate(event: any): void {
+    if(!this.isNullOrUndefined(event.srcElement.value)) {
+      const str = event.srcElement.value;
+      this.resource.dateOfBirth = this.convertDateUSFromStringBr(str.split("/"));
+    }
   }
   
   /**
@@ -65,10 +72,6 @@ export class DriverFormComponent extends BaseResourceFormComponent<Driver> {
       return true;
     }
     return false;
-  }
-
-  isNullOrUndefined(obj: any): boolean {
-    return isNullOrUndefined(obj);
   }
 
 }
