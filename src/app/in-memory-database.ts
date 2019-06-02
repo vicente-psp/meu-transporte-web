@@ -4,7 +4,7 @@ import { Driver } from './pages/drivers/shared/driver.model';
 export class InMemoryDatabase implements InMemoryDbService {
   createDb() {
     let drivers: Driver[] = [
-      { id: 1, name: 'João Paulo', cnh: '2353423', cpf: '1234563211' },
+      { id: 1, name: 'João Paulo', dateOfBirth: new Date(1992, 9, 24), cnh: '2353423', cpf: '12345632112', phone: '62984994081' },
     ];
     return {drivers};
   }
