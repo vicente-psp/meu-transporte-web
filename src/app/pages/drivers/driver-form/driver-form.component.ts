@@ -1,10 +1,10 @@
 import { Component, Injector } from '@angular/core';
-import { Validators } from '@angular/forms';
 
 import { BaseResourceFormComponent } from 'src/app/shared/components/base-resource-form/base-resource-form.component';
 
 import { Driver } from '../shared/driver.model';
 import { DriverService } from '../shared/driver.service';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-driver-form',
@@ -13,30 +13,62 @@ import { DriverService } from '../shared/driver.service';
 })
 export class DriverFormComponent extends BaseResourceFormComponent<Driver> {
 
+  public phoneMask = {mask: '(00)00000-0000'};
+  public cpfMask = {mask: '000.000.000-00'};
+  public cnhMask = {mask: '00000000000'};
+  public dateMask = {mask: '00/00/0000'};
+
+  maxDate: Date = new Date();
+
   constructor(
     protected driverService: DriverService,
     protected injector: Injector
   ) {
-    super(injector, new Driver(), driverService, Driver.fromJson)
+    super(injector, new Driver(), driverService, Driver.fromJson);
+
+
+    this.maxDate = new Date(new Date().getFullYear() - 18, new Date().getMonth() + 1, new Date().getDate());
   }
 
   protected buildResourceForm() {
-    this.resourceForm = this.formBuilder.group({
-      id: [null],
-      name: [null, [Validators.required, Validators.minLength(2)]],
-      cnh: [null, [Validators.required, Validators.maxLength(11)]],
-      cpf: [null, [Validators.required, Validators.maxLength(11)]],
-      phone: [null, [Validators.required]],
-    });
   }
 
   protected createPageTitle(): string {
-    return 'Cadastro de Novo Motorista';
+    return 'Cadastro de motorista';
   }
 
   protected editionPageTitle(): string {
     const driverName = this.resource.name || '';
-    return 'Editando Motorista: ' + driverName;
+    return 'Editando motorista: ' + driverName;
+  }
+
+
+  clearInput(input: string): void {
+    if (this.isStringValid(input)) {
+      this.resource[input] = '';
+    }
+  }
+
+  isTextInput(text: string): boolean {
+    if (this.isStringValid(text)) {
+      return true;
+    }
+    return false;
+  }
+  
+  /**
+   * Verifica se existe texto válido na string
+   * @param value 
+   */
+  isStringValid(value: string): boolean {
+    if (!this.isNullOrUndefined(value) && value.length > 0) {
+      return true;
+    }
+    return false;
+  }
+
+  isNullOrUndefined(obj: any): boolean {
+    return isNullOrUndefined(obj);
   }
 
 }
