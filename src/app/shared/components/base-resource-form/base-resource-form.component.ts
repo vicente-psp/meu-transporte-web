@@ -1,5 +1,5 @@
 import { OnInit, AfterContentChecked, Injector } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { BaseResourceModel } from '../../models/base-resource.model';
@@ -8,12 +8,11 @@ import { BaseResourceService } from '../../services/base-resource.service';
 import { switchMap } from 'rxjs/operators';
 
 import toastr from 'toastr';
-import { resource } from 'selenium-webdriver/http';
+import { isNullOrUndefined, isDate } from 'util';
 
 export abstract class BaseResourceFormComponent<T extends BaseResourceModel> implements OnInit, AfterContentChecked {
 
     currentAction: string;
-    // resourceForm: FormGroup;
     pageTitle: string;
     serverErrorMessages: string[] = null;
     submittingForm: boolean = false;
@@ -21,7 +20,6 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     protected route: ActivatedRoute;
     protected router: Router;
     protected formBuilder: FormBuilder;
-    // protected entity: T;
 
     constructor(
         protected injector: Injector,
@@ -70,9 +68,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
             )
                 .subscribe(
                     (resource) => {
-                        // this.entity = resource;
                         this.resource = resource;
-                        // this.resourceForm.patchValue(this.resource);
                     },
                     (error) => alert('Ocorreu um erro no servidor')
                 )
@@ -87,8 +83,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
         }
     }
 
-    protected createResource() {
-        // const resource: T = this.jsonDataToResourcefn(this.entity);        
+    protected createResource() {      
         this.resourceService.create(this.resource).subscribe(
             resource => this.actionsForSuccess(resource),
             error => this.actionsForError(error)
@@ -102,8 +97,6 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
             error => this.actionsForError(error)
         )
     }
-
-
 
     protected actionsForSuccess(resource: T) {
         toastr.success('Solicitação processada com sucesso');
@@ -135,4 +128,22 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     }
 
     protected abstract buildResourceForm(): void;
+
+    protected isNullOrUndefined(obj: any): boolean {
+        return isNullOrUndefined(obj);
+    }
+
+    protected isDateValid(obj: Date): boolean {
+        if (!this.isNullOrUndefined(obj) && isDate(obj)) {
+            return true;
+        }
+        return false;
+    }
+
+    protected convertDateUSFromStringBr(obj: number[]): Date | null {
+      if (obj.length === 3) {
+        return new Date(obj[2], obj[1] - 1, obj[0]);
+      }
+      return null;
+    }
 }
