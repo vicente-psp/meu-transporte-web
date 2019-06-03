@@ -41,7 +41,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
         this.setPageTitle();
     }
 
-    submitForm() {
+    salvar(): void {
         if (this.isValidResource()) {
             if (this.currentAction === 'cadastrar') {
                 this.createResource();
@@ -54,7 +54,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     protected abstract isValidResource(): boolean;
 
 
-    protected setCurrentAction() {
+    protected setCurrentAction(): void {
         if (this.route.snapshot.url[0].path === 'cadastrar') {
             this.currentAction = 'cadastrar';
         } else {
@@ -62,7 +62,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
         }
     }
 
-    protected loadResource() {
+    protected loadResource(): void {
         if (this.currentAction === 'editar') {
             this.route.paramMap.pipe(
                 switchMap(params => this.resourceService.getById(+params.get('id')))
@@ -76,7 +76,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
         }
     }
 
-    protected setPageTitle() {
+    protected setPageTitle(): void {
         if (this.currentAction === 'cadastrar') {
             this.pageTitle = this.createPageTitle();
         } else {
@@ -84,14 +84,14 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
         }
     }
 
-    protected createResource() {      
+    protected createResource(): void {      
         this.resourceService.create(this.resource).subscribe(
             resource => this.actionsForSuccess(resource),
             error => this.actionsForError(error)
         )
     }
 
-    protected updateResource() {
+    protected updateResource(): void {
         const resource: T = this.jsonDataToResourcefn(this.resource);
         this.resourceService.update(resource).subscribe(
             resource => this.actionsForSuccess(resource),
@@ -99,7 +99,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
         )
     }
 
-    protected actionsForSuccess(resource: T) {
+    protected actionsForSuccess(resource: T): void {
         toastr.success('Solicitação processada com sucesso');
 
         const baseComponentPath: string = this.route.snapshot.parent.url[0].path;
@@ -108,7 +108,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
         )
     }
 
-    protected actionsForError(error) {
+    protected actionsForError(error): void {
         toastr.error('Ocorreu um erro ao processar solicitação');
 
         this.submittingForm = false;
@@ -158,13 +158,9 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
       }
       return false;
     }
-    
-    /**
-     * Verifica se existe texto válido na string
-     * @param value 
-     */
-    protected isStringValid(value: string): boolean {
-      if (!this.isNullOrUndefined(value) && value.length > 0) {
+
+    protected isStringValid(value: string, minLength: number = 1): boolean {
+      if (!this.isNullOrUndefined(value) && value.length >= minLength) {
         return true;
       }
       return false;
