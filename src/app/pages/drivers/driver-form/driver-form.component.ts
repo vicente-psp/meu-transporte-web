@@ -29,22 +29,33 @@ export class DriverFormComponent extends BaseResourceFormComponent<Driver> {
     this.maxDate = new Date(new Date().getFullYear() - 18, new Date().getMonth() + 1, new Date().getDate());
   }
 
-  salvar(): void {
-    this.submitForm();
+  protected isValidResource(): boolean {
+    if (!this.isStringValid(this.resource.name)) {
+      return false;
+    }
+    if (this.isDateValid(this.resource.dateOfBirth) && this.resource.dateOfBirth > this.maxDate) {
+      return false;
+    }
+    if (!this.isStringValid(this.resource.cnh)) {
+      return false;
+    }
+    if (!this.isStringValid(this.resource.cpf)) {
+      return false;
+    }
+    if (!this.isStringValid(this.resource.phone)) {
+      return false;
+    }
+    return true;
   }
 
-  protected isValidResource(): boolean {
-    if (this.resource.name) {
-      return true;
-    }
-    return false;
+  keyupClick(event): void {
+    console.log(event.key);
   }
   
   convertToDate(event: any): void {
     if(!this.isNullOrUndefined(event.srcElement.value)) {
       const str = event.srcElement.value;
       this.resource.dateOfBirth = this.convertDateUSFromStringBr(str.split("/"));
-      console.log(this.resource.dateOfBirth);
     }
   }
 
