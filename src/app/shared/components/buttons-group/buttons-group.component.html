@@ -1,0 +1,13 @@
+<button mat-raised-button type="button"
+  [routerLink]="backButtonLink" style="margin-right: 15px;"
+  [ngClass]="backButtonClass">
+  <mat-icon>{{ backButtonIcon }}</mat-icon>
+  {{ backButtonText }}
+</button>
+
+<button mat-raised-button type="button" style="margin-right: 15px;"
+  [ngClass]="saveButtonClass" [color]="saveButtonColor" (click)="clickValueEmit()"
+  [disabled]="saveButtonDisabled">
+  <mat-icon>{{ saveButtonIcon }}</mat-icon>
+  {{ saveButtonText }}
+</button>

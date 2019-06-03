@@ -15,6 +15,7 @@ import { BreadCrumbComponent } from './components/bread-crumb/bread-crumb.compon
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { FormFieldErrorComponent } from './components/form-field-error/form-field-error.component';
 import { ServerErrorMessagesComponent } from './components/server-error-messages/server-error-messages.component';
+import { ButtonsGroupComponent } from './components/buttons-group/buttons-group.component';
 
 // componentes do primeng
 import { ButtonModule } from 'primeng/button';
@@ -45,7 +46,8 @@ import { CardModule } from 'primeng/card';
     BreadCrumbComponent,
     PageHeaderComponent,
     FormFieldErrorComponent,
-    ServerErrorMessagesComponent
+    ServerErrorMessagesComponent,
+    ButtonsGroupComponent
   ],
   exports: [
     CommonModule,
@@ -53,6 +55,7 @@ import { CardModule } from 'primeng/card';
     BreadCrumbComponent,
     RouterModule,
     PageHeaderComponent,
+    ButtonsGroupComponent,
     FormFieldErrorComponent,
     ServerErrorMessagesComponent,
     ButtonModule,
