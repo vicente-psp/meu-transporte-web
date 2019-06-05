@@ -1,0 +1,83 @@
+<app-bread-crumb
+  [itens]="[{text: 'Clientes', link: '/clientes'}, {text: pageTitle}]"
+></app-bread-crumb>
+
+<mat-drawer-container style="width: 100%;">
+    <div class="row" style="margin-left: 10px; margin-right: 10px; margin-top: 15px;">
+      <div class="col-md-12">
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label for="name">Nome</mat-label>  
+          <input matInput [(ngModel)]="resource.name" required maxlength="255">
+          <button *ngIf="isTextInputValid(resource.name)"
+              mat-icon-button matSuffix (click)="clearInput('name')">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row" style="margin-left: 10px; margin-right: 10px;">
+      <div class="col-md-3">
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label for="dateOfBirth">Data nascimento</mat-label> 
+          <input matInput [(ngModel)]="resource.dateOfBirth"
+            (change)="convertToDate($event)"
+            (keyup)="keyupClick($event)"
+            [max]="maxDate" [matDatepicker]="picker"
+            required maxlength="10">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-3">
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label for="cnh">CNH</mat-label>  
+          <input matInput [imask]="cnhMask" [(ngModel)]="resource.cnh" required>
+          <button *ngIf="isTextInputValid(resource.cnh)"
+              mat-icon-button matSuffix (click)="clearInput('cnh')">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label for="cpf">CPF</mat-label>  
+          <input matInput [imask]="cpfMask" [(ngModel)]="resource.cpf" required>
+          <button *ngIf="isTextInputValid(resource.cpf)"
+              mat-icon-button matSuffix (click)="clearInput('cpf')">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label for="phone">Telefone</mat-label>  
+          <input matInput [imask]="phoneMask" [(ngModel)]="resource.phone" required>
+          <button *ngIf="isTextInputValid(resource.phone)"
+              mat-icon-button matSuffix (click)="clearInput('phone')">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+    </div>
+</mat-drawer-container>
+
+  <button mat-raised-button type="button"
+  [routerLink]="'/clientes'" style="margin-right: 15px;"
+  class="mt-2 float-right">
+  <mat-icon>chevron_left</mat-icon>
+  Voltar
+</button>
+<button mat-raised-button type="button" style="margin-right: 15px;"
+  class="mt-2 float-right" [color]="'primary'" (click)="salvar()"
+  [disabled]="!isValidResource()">
+  <mat-icon>check</mat-icon>
+  Salvar
+</button>
+
+
+<!-- <app-buttons-group
+  back-button-link="'/motoristas'"
+  save-button-disabled="!isValidResource()"
+  (clickButtonSave)="salvar()"></app-buttons-group> -->
