@@ -4,7 +4,7 @@ export class Client extends BaseResourceModel {
     constructor(
         public id?: number,
         public socialName?: string,
-        public fantasy?: string,
+        public nameFantasy?: string,
         public cnpj?: string,
         public phone?: string
     ){
