@@ -10,6 +10,6 @@ import { Driver } from './driver.model';
 export class DriverService extends BaseResourceService<Driver> {
 
   constructor(protected injector: Injector) {
-    super('api/drivers', injector, Driver.fromJson);
+    super('drivers', injector, Driver.fromJson);
   }
 }

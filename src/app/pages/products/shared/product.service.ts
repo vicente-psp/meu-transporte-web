@@ -10,6 +10,6 @@ import { Product } from './product.model';
 export class ProductService extends BaseResourceService<Product> {
 
   constructor(protected injector: Injector) {
-    super('api/products', injector, Product.fromJson);
+    super('products', injector, Product.fromJson);
   }
 }

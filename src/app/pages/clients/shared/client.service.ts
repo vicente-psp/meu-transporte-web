@@ -10,6 +10,6 @@ import { Client } from './client.model';
 export class ClientService extends BaseResourceService<Client> {
 
   constructor(protected injector: Injector) {
-    super('api/clients', injector, Client.fromJson);
+    super('clients', injector, Client.fromJson);
   }
 }
