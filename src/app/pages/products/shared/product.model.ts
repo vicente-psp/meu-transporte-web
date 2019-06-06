@@ -3,11 +3,8 @@ import { BaseResourceModel } from '../../../shared/models/base-resource.model';
 export class Product extends BaseResourceModel {
     constructor(
         public id?: number,
-        public dateOfBirth?: Date,
-        public name?: string,
-        public cnh?: string,
-        public cpf?: string,
-        public phone?: string
+        public description?: string,
+        public unitValue?: number,
     ){
         super();
     }
