@@ -3,10 +3,9 @@ import { BaseResourceModel } from '../../../shared/models/base-resource.model';
 export class Client extends BaseResourceModel {
     constructor(
         public id?: number,
-        public dateOfBirth?: Date,
-        public name?: string,
-        public cnh?: string,
-        public cpf?: string,
+        public socialName?: string,
+        public fantasy?: string,
+        public cnpj?: string,
         public phone?: string
     ){
         super();
