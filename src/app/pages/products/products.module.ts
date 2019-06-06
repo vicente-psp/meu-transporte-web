@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 
 import { IMaskModule } from 'angular-imask';
 
@@ -34,7 +34,8 @@ export const DD_MM_YYYY_Format = {
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
-    { provide: MAT_DATE_FORMATS, useValue: DD_MM_YYYY_Format }
+    { provide: MAT_DATE_FORMATS, useValue: DD_MM_YYYY_Format },
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
   ],
 })
 export class ProductsModule { }
