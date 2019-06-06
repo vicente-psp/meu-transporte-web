@@ -13,50 +13,28 @@ import { ClientService } from '../shared/client.service';
 export class ClientFormComponent extends BaseResourceFormComponent<Client> {
 
   public phoneMask = {mask: '(00)00000-0000'};
-  public cpfMask = {mask: '000.000.000-00'};
-  public cnhMask = {mask: '00000000000'};
-  public dateMask = {mask: '00/00/0000'};
+  public cnpjMask = {mask: '00.000.000/0000-00'};
 
-  maxDate: Date = new Date();
 
   constructor(
     protected clientService: ClientService,
     protected injector: Injector
   ) {
     super(injector, new Client(), clientService, Client.fromJson);
-
-
-    this.maxDate = new Date(new Date().getFullYear() - 18, new Date().getMonth() + 1, new Date().getDate());
   }
+  
 
   protected isValidResource(): boolean {
-    if (!this.isStringValid(this.resource.name)) {
+    if (!this.isStringValid(this.resource.socialName)) {
       return false;
     }
-    if (this.isDateValid(this.resource.dateOfBirth) && this.resource.dateOfBirth > this.maxDate) {
-      return false;
-    }
-    if (!this.isStringValid(this.resource.cnh)) {
-      return false;
-    }
-    if (!this.isStringValid(this.resource.cpf)) {
+    if (!this.isStringValid(this.resource.cnpj)) {
       return false;
     }
     if (!this.isStringValid(this.resource.phone)) {
       return false;
     }
     return true;
-  }
-
-  keyupClick(event): void {
-    console.log(event.key);
-  }
-  
-  convertToDate(event: any): void {
-    if(!this.isNullOrUndefined(event.srcElement.value)) {
-      const str = event.srcElement.value;
-      this.resource.dateOfBirth = this.convertDateUSFromStringBr(str.split("/"));
-    }
   }
 
 }
