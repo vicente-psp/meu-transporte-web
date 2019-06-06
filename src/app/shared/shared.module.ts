@@ -16,6 +16,9 @@ import { PageHeaderComponent } from './components/page-header/page-header.compon
 import { FormFieldErrorComponent } from './components/form-field-error/form-field-error.component';
 import { ServerErrorMessagesComponent } from './components/server-error-messages/server-error-messages.component';
 import { ButtonsGroupComponent } from './components/buttons-group/buttons-group.component';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
 
 // componentes do primeng
 import { ButtonModule } from 'primeng/button';
@@ -41,6 +44,9 @@ import { CardModule } from 'primeng/card';
     MatButtonModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatTableModule,
   ],
   declarations: [
     BreadCrumbComponent,
@@ -70,6 +76,9 @@ import { CardModule } from 'primeng/card';
     MatButtonModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatTableModule,
   ]
 })
 export class SharedModule { }
