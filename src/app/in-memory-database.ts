@@ -11,7 +11,7 @@ export class InMemoryDatabase implements InMemoryDbService {
 
 
     let clients: Client[] = [
-      { id: 1, socialName: 'PANIFICADORA X LTDA', fantasy: 'PÃO X', cnpj: '12345632112', phone: '62984496473' },
+      { id: 1, socialName: 'PANIFICADORA X LTDA', nameFantasy: 'PÃO X', cnpj: '12345632112', phone: '62984496473' },
     ];
 
 
