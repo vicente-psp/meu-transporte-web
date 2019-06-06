@@ -10,20 +10,18 @@
 <table class="table table-hover">
   <thead>
     <tr class="bg-primary text-light">
-      <th>Cliente</th>
-      <th>Data nasc.</th>
-      <th>CNH</th>
-      <th>CPF</th>
+      <th>Razão social</th>
+      <th>Nome fantasia</th>
+      <th>CNPJ</th>
       <th>Telefone</th>
       <th>Ações</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let resource of resources">
-      <td>{{ resource.name }}</td>
-      <td>{{ resource.dateOfBirth | date: 'dd/MM/yyyy' }}</td>
-      <td>{{ resource.cnh }}</td>
-      <td>{{ resource.cpf }}</td>
+      <td>{{ resource.socialName }}</td>
+      <td>{{ resource.nameFantasy }}</td>
+      <td>{{ resource.cnpj }}</td>
       <td>{{ resource.phone }}</td>
       <td>
         <a [routerLink]="['editar', resource.id]" class="btn btn-outline-info btn-sm mr-2">Editar</a>

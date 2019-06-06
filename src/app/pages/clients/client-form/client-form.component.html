@@ -6,10 +6,22 @@
     <div class="row" style="margin-left: 10px; margin-right: 10px; margin-top: 15px;">
       <div class="col-md-12">
         <mat-form-field appearance="outline" style="width: 100%;">
-          <mat-label for="name">Nome</mat-label>  
-          <input matInput [(ngModel)]="resource.name" required maxlength="255">
-          <button *ngIf="isTextInputValid(resource.name)"
-              mat-icon-button matSuffix (click)="clearInput('name')">
+          <mat-label for="socialName">Razão social</mat-label>  
+          <input matInput [(ngModel)]="resource.socialName" required maxlength="255">
+          <button *ngIf="isTextInputValid(resource.socialName)"
+              mat-icon-button matSuffix (click)="clearInput('socialName')">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row" style="margin-left: 10px; margin-right: 10px; margin-top: 15px;">
+      <div class="col-md-12">
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label for="nameFantasy">Nome fantasia</mat-label>  
+          <input matInput [(ngModel)]="resource.nameFantasy" maxlength="255">
+          <button *ngIf="isTextInputValid(resource.nameFantasy)"
+              mat-icon-button matSuffix (click)="clearInput('nameFantasy')">
             <mat-icon>clear</mat-icon>
           </button>
         </mat-form-field>
@@ -19,33 +31,10 @@
     <div class="row" style="margin-left: 10px; margin-right: 10px;">
       <div class="col-md-3">
         <mat-form-field appearance="outline" style="width: 100%;">
-          <mat-label for="dateOfBirth">Data nascimento</mat-label> 
-          <input matInput [(ngModel)]="resource.dateOfBirth"
-            (change)="convertToDate($event)"
-            (keyup)="keyupClick($event)"
-            [max]="maxDate" [matDatepicker]="picker"
-            required maxlength="10">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-      </div>
-
-      <div class="col-md-3">
-        <mat-form-field appearance="outline" style="width: 100%;">
-          <mat-label for="cnh">CNH</mat-label>  
-          <input matInput [imask]="cnhMask" [(ngModel)]="resource.cnh" required>
-          <button *ngIf="isTextInputValid(resource.cnh)"
-              mat-icon-button matSuffix (click)="clearInput('cnh')">
-            <mat-icon>clear</mat-icon>
-          </button>
-        </mat-form-field>
-      </div>
-      <div class="col-md-3">
-        <mat-form-field appearance="outline" style="width: 100%;">
-          <mat-label for="cpf">CPF</mat-label>  
-          <input matInput [imask]="cpfMask" [(ngModel)]="resource.cpf" required>
-          <button *ngIf="isTextInputValid(resource.cpf)"
-              mat-icon-button matSuffix (click)="clearInput('cpf')">
+          <mat-label for="cnpj">CNPJ</mat-label>  
+          <input matInput [imask]="cnpjMask" [(ngModel)]="resource.cnpj" required>
+          <button *ngIf="isTextInputValid(resource.cnpj)"
+              mat-icon-button matSuffix (click)="clearInput('cnpj')">
             <mat-icon>clear</mat-icon>
           </button>
         </mat-form-field>
