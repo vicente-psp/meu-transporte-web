@@ -10,21 +10,15 @@
 <table class="table table-hover">
   <thead>
     <tr class="bg-primary text-light">
-      <th>Cliente</th>
-      <th>Data nasc.</th>
-      <th>CNH</th>
-      <th>CPF</th>
-      <th>Telefone</th>
+      <th>Descrição</th>
+      <th>Vlr unitário</th>
       <th>Ações</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let resource of resources">
-      <td>{{ resource.name }}</td>
-      <td>{{ resource.dateOfBirth | date: 'dd/MM/yyyy' }}</td>
-      <td>{{ resource.cnh }}</td>
-      <td>{{ resource.cpf }}</td>
-      <td>{{ resource.phone }}</td>
+      <td>{{ resource.description }}</td>
+      <td>{{ resource.unitValue | currency: 'BRL': true: '1.2-2' }}</td>
       <td>
         <a [routerLink]="['editar', resource.id]" class="btn btn-outline-info btn-sm mr-2">Editar</a>
         <button (click)="deleteResource(resource)" class="btn btn-outline-danger btn-sm">Excluir</button>
