@@ -11,12 +11,12 @@ export class InMemoryDatabase implements InMemoryDbService {
 
 
     let clients: Client[] = [
-      { id: 1, name: 'Pedro', dateOfBirth: new Date(1990, 5, 4), cnh: '98782353423', cpf: '12345632112', phone: '62984496473' },
+      { id: 1, socialName: 'PANIFICADORA X LTDA', fantasy: 'PÃO X', cnpj: '12345632112', phone: '62984496473' },
     ];
 
 
     let products: Product[] = [
-      { id: 1, name: 'Pneu', dateOfBirth: new Date(1990, 5, 4), cnh: '98782353423', cpf: '12345632112', phone: '62984496473' },
+      { id: 1, description: 'Coca-cola', unitValue: 2.45 },
     ];
 
     return {drivers, clients, products};
