@@ -9,6 +9,8 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
 
     protected httpClient: HttpClient;
 
+    private API_ENDPOINT = 'api/';
+
     constructor(
         protected apiPath: string,
         protected injector: Injector,
@@ -17,15 +19,19 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
         this.httpClient = injector.get(HttpClient);
     }
 
+    get endPoint(): string {
+        return this.API_ENDPOINT + this.apiPath;
+    }
+
     getAll(): Observable<T[]> {
-        return this.httpClient.get(this.apiPath).pipe(
+        return this.httpClient.get(this.endPoint).pipe(
             map(this.jsonDataToResources.bind(this)),
             catchError(this.handleError)
         )
     }
     
     getById(id: number): Observable<T> {
-        const url = `${this.apiPath}/${id}`;
+        const url = `${this.endPoint}/${id}`;
 
         return this.httpClient.get(url).pipe(
             map(this.jsonDataToResource.bind(this)),
@@ -34,14 +40,14 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
     }
     
     create(resource: T): Observable<T> {
-        return this.httpClient.post(this.apiPath, resource).pipe(
+        return this.httpClient.post(this.endPoint, resource).pipe(
             map(this.jsonDataToResource.bind(this)),
             catchError(this.handleError)
         )
     }
 
     update(resource: T): Observable<T> {
-        const url = `${this.apiPath}/${resource.id}`;
+        const url = `${this.endPoint}/${resource.id}`;
         return this.httpClient.put(url, resource).pipe(
             map(() => resource),
             catchError(this.handleError)
@@ -49,7 +55,7 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
     }
 
     delete(id: number): Observable<any> {
-        const url = `${this.apiPath}/${id}`;
+        const url = `${this.endPoint}/${id}`;
         return this.httpClient.delete(url).pipe(
             map(() => null),
             catchError(this.handleError)
