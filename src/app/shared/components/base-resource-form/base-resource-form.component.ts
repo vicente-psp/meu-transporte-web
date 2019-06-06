@@ -166,4 +166,11 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
       return false;
     }
 
+    protected isNumberValid(value: number, minValue: number = 1): boolean {
+      if (!this.isNullOrUndefined(value) && value >= minValue) {
+        return true;
+      }
+      return false;
+    }
+
 }
