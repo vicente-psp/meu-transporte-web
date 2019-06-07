@@ -5,6 +5,12 @@
       </h1>
     </div>
     <div *ngIf="showButton" class="col-md-3 text-right">
-      <button pButton type="button" [routerLink]="buttonLink" [label]="buttonText" class="ui-button-secondary"></button>
+      <button mat-raised-button type="button" 
+              [routerLink]="buttonLink"
+              [color]="buttonColor"
+              class="ui-button-secondary">
+        <mat-icon>{{ buttonMatIcon }}</mat-icon>
+        {{ buttonText }}
+      </button>
     </div>
 </div>
