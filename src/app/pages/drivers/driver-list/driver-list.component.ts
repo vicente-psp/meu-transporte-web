@@ -12,6 +12,8 @@ import { DriverService } from '../shared/driver.service';
 })
 export class DriverListComponent extends BaseResourceListComponent<Driver> {
 
+  public displayedColumns = ['name', 'dateOfBirth', 'cnh', 'cpf', 'phone', 'actions'];
+
   constructor(private driverService: DriverService) {
     super(driverService);
   }
