@@ -35,7 +35,7 @@ export const DD_MM_YYYY_Format = {
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
     { provide: MAT_DATE_FORMATS, useValue: DD_MM_YYYY_Format },
-    { provide: LOCALE_ID, useValue: 'pt-BR' },
+    // { provide: LOCALE_ID, useValue: 'pt-BR' },
   ],
 })
 export class ProductsModule { }
