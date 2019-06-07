@@ -2,33 +2,52 @@
 
 <app-page-header
   page-title="Motoristas"
-  button-text="+ Cadastrar"
+  button-text=" Cadastrar"
   button-link="cadastrar"
   button-class="btn-success"
+  button-mat-icon="people"
 ></app-page-header>
 
-<table class="table table-hover">
-  <thead>
-    <tr class="bg-primary text-light">
-      <th>Motorista</th>
-      <th>Data nasc.</th>
-      <th>CNH</th>
-      <th>CPF</th>
-      <th>Telefone</th>
-      <th>Ações</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let resource of resources">
-      <td>{{ resource.name }}</td>
-      <td>{{ resource.dateOfBirth | date: 'dd/MM/yyyy' }}</td>
-      <td>{{ resource.cnh }}</td>
-      <td>{{ resource.cpf }}</td>
-      <td>{{ resource.phone }}</td>
-      <td>
-        <a [routerLink]="['editar', resource.id]" class="btn btn-outline-info btn-sm mr-2">Editar</a>
-        <button (click)="deleteResource(resource)" class="btn btn-outline-danger btn-sm">Excluir</button>
-      </td>
-    </tr>
-  </tbody>
+<table mat-table [dataSource]="resources" matSort class="mat-elevation-z8" style="width: 100%;">
+  <!-- name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Motorista </th>
+    <td mat-cell *matCellDef="let obj"> {{ obj.name }} </td>
+  </ng-container>
+
+  <!-- dateOfBirth Column -->
+  <ng-container matColumnDef="dateOfBirth">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Dt nasc. </th>
+    <td mat-cell *matCellDef="let obj"> {{ obj.dateOfBirth | date: 'dd/MM/yyyy' }} </td>
+  </ng-container>
+
+  <!-- cnh Column -->
+  <ng-container matColumnDef="cnh">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> CNH </th>
+    <td mat-cell *matCellDef="let obj"> {{ obj.cnh }} </td>
+  </ng-container>
+
+  <!-- cpf Column -->
+  <ng-container matColumnDef="cpf">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> CPF </th>
+    <td mat-cell *matCellDef="let obj"> {{ obj.cpf }} </td>
+  </ng-container>
+
+  <!-- phone Column -->
+  <ng-container matColumnDef="phone">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> PHONE </th>
+    <td mat-cell *matCellDef="let obj"> {{ obj.phone }} </td>
+  </ng-container>
+
+  <!-- actions Column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Ações </th>
+    <td mat-cell *matCellDef="let obj">
+      <a [routerLink]="['editar', obj.id]" class="btn btn-outline-info btn-sm mr-2">Editar</a>
+      <button (click)="deleteResource(obj)" class="btn btn-outline-danger btn-sm">Excluir</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
