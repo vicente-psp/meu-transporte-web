@@ -1,6 +1,6 @@
 import { BaseResourceModel } from "../models/base-resource.model";
 import { Injector } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
@@ -22,6 +22,33 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
     get endPoint(): string {
         return this.API_ENDPOINT + this.apiPath;
     }
+
+
+    // https://stackoverflow.com/questions/45210406/angular-4-3-httpclient-set-params
+    getCountries(data: any) {
+        // We don't need any more these lines
+        // let httpParams = new HttpParams();
+        // Object.keys(data).forEach(function (key) {
+        //     httpParams = httpParams.append(key, data[key]);
+        // });
+    
+        return this.httpClient.get("/api/countries", {params: data})
+    }
+    getPagedList(filtro: any): Observable<T[]> {
+        let httpParams: HttpParams = new HttpParams();
+
+        Object.keys(filtro).forEach(element => {
+            httpParams = httpParams.append(element, filtro[element]);
+        });
+
+        console.log(httpParams);
+
+        return this.httpClient.get(this.endPoint + '/paged-list', {params: httpParams}).pipe(
+            map(this.jsonDataToResources.bind(this)),
+            catchError(this.handleError)
+        )
+    }
+    
 
     getAll(): Observable<T[]> {
         return this.httpClient.get(this.endPoint).pipe(
