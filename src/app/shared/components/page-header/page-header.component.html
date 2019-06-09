@@ -1,16 +1,26 @@
 <div class="row mb-4">
-    <div class="col-md-9">
+    <div class="col-md-7">
       <h1 class="h2 border-left pl-2">
         {{ pageTitle }}
       </h1>
     </div>
-    <div *ngIf="showButton" class="col-md-3 text-right">
-      <button mat-raised-button type="button" 
-              [routerLink]="buttonLink"
-              [color]="buttonColor"
-              class="ui-button-secondary">
-        <mat-icon>{{ buttonMatIcon }}</mat-icon>
-        {{ buttonText }}
+    <div *ngIf="isShowButtons()" class="col-md-5 text-right">
+      <button *ngIf="buttonFilterShow"
+              mat-raised-button type="button"
+              [matTooltip]="buttonFilterTooltip"
+              [matTooltipPosition]="buttonFilterTooltipPosition"
+              (click)="buttonFilterClick()">
+        <mat-icon>{{ buttonFilterMatIcon }}</mat-icon>
+        {{ buttonFilterText }}
+      </button>
+      <button *ngIf="buttonRegisterShow"
+              mat-raised-button type="button" 
+              [routerLink]="buttonRegisterLink"
+              [matTooltip]="buttonRegisterTooltip"
+              [matTooltipPosition]="buttonRegisterTooltipPosition"
+              [color]="buttonRegisterColor">
+        <mat-icon>{{ buttonRegisterMatIcon }}</mat-icon>
+        {{ buttonRegisterText }}
       </button>
     </div>
 </div>
