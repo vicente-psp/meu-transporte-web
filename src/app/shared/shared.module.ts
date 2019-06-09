@@ -19,6 +19,7 @@ import { ButtonsGroupComponent } from './components/buttons-group/buttons-group.
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 // componentes do primeng
 import { ButtonModule } from 'primeng/button';
@@ -47,6 +48,7 @@ import { CardModule } from 'primeng/card';
     MatSortModule,
     MatPaginatorModule,
     MatTableModule,
+    MatTooltipModule,
   ],
   declarations: [
     BreadCrumbComponent,
@@ -79,6 +81,7 @@ import { CardModule } from 'primeng/card';
     MatSortModule,
     MatPaginatorModule,
     MatTableModule,
+    MatTooltipModule,
   ]
 })
 export class SharedModule { }
