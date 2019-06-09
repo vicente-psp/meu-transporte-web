@@ -1,5 +1,4 @@
 import { OnInit, AfterContentChecked, Injector } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { BaseResourceModel } from '../../models/base-resource.model';
@@ -19,7 +18,6 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     
     protected route: ActivatedRoute;
     protected router: Router;
-    protected formBuilder: FormBuilder;
 
     constructor(
         protected injector: Injector,
@@ -29,7 +27,6 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     ) {
        this.route = this.injector.get(ActivatedRoute);
        this.router = this.injector.get(Router);
-       this.formBuilder = this.injector.get(FormBuilder);
     }
 
     ngOnInit() {
