@@ -9,6 +9,7 @@ import { DriverFormComponent } from './driver-form/driver-form.component';
 import { DriverListComponent } from './driver-list/driver-list.component';
 
 import { MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material';
+import { DriverFilterComponent } from './driver-filter/driver-filter.component';
 
 export const DD_MM_YYYY_Format = {
   parse: {
@@ -30,7 +31,8 @@ export const DD_MM_YYYY_Format = {
   ],
   declarations: [
     DriverFormComponent,
-    DriverListComponent
+    DriverListComponent,
+    DriverFilterComponent
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
