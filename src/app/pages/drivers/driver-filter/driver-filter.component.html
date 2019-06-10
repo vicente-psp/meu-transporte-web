@@ -1,0 +1,40 @@
+<mat-drawer-container style="width: 100%;">
+  <div class="row" style="margin-left: 10px; margin-right: 10px; margin-top: 15px;">
+    <div class="col-md-6">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label for="name">Motorista</mat-label>  
+        <input matInput [(ngModel)]="resource.name" maxlength="255"
+               (blur)="listPagedResources('name')">
+        <button mat-icon-button matSuffix
+                [disabled]="!isTextInputValid(resource.name)"
+                (click)="clearInput('name')">
+            <mat-icon matSuffix>{{ getMatIcon(resource.name) }}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="col-md-3">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label for="cnh">CNH</mat-label>  
+        <input matInput [imask]="cnhMask" [(ngModel)]="resource.cnh"
+               (blur)="listPagedResources('cnh')">
+        <button mat-icon-button matSuffix
+                [disabled]="!isTextInputValid(resource.cnh)"
+                (click)="clearInput('cnh')">
+            <mat-icon matSuffix>{{ getMatIcon(resource.cnh) }}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="col-md-3">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label for="cpf">CPF</mat-label>  
+        <input matInput [imask]="cpfMask" [(ngModel)]="resource.cpf"
+               (blur)="listPagedResources('cpf')">
+        <button mat-icon-button matSuffix 
+                [disabled]="!isTextInputValid(resource.cpf)"
+                (click)="clearInput('cpf')">
+            <mat-icon matSuffix>{{ getMatIcon(resource.cpf) }}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  </div>
+</mat-drawer-container>
