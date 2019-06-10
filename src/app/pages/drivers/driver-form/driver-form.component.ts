@@ -24,8 +24,6 @@ export class DriverFormComponent extends BaseResourceFormComponent<Driver> {
     protected injector: Injector
   ) {
     super(injector, new Driver(), driverService, Driver.fromJson);
-
-
     this.maxDate = new Date(new Date().getFullYear() - 18, new Date().getMonth() + 1, new Date().getDate());
   }
 
