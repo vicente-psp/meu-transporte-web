@@ -13,7 +13,7 @@ import { ClientService } from '../shared/client.service';
 export class ClientListComponent extends BaseResourceListComponent<Client> {
 
   constructor(private clientService: ClientService) {
-    super(clientService);
+    super(clientService, new Client());
   }
 
 }

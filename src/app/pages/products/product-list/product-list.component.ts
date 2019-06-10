@@ -13,7 +13,7 @@ import { ProductService } from '../shared/product.service';
 export class ProductListComponent extends BaseResourceListComponent<Product> {
 
   constructor(private productService: ProductService) {
-    super(productService);
+    super(productService, new Product());
   }
 
 }
