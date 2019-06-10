@@ -12,10 +12,20 @@ import { DriverService } from '../shared/driver.service';
 })
 export class DriverListComponent extends BaseResourceListComponent<Driver> {
 
+  showFilter: boolean = false;
+
   public displayedColumns = ['name', 'dateOfBirth', 'cnh', 'cpf', 'phone', 'actions'];
 
   constructor(private driverService: DriverService) {
-    super(driverService);
+    super(driverService, new Driver());
+  }
+
+  changeResources(event) {
+    this.resources.data = event;
+  }
+
+  setShowFilter(event): void {
+    this.showFilter = event;
   }
 
 }
