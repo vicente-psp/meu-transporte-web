@@ -4,7 +4,7 @@
       <mat-form-field appearance="outline" style="width: 100%;">
         <mat-label for="name">Motorista</mat-label>  
         <input matInput [(ngModel)]="resource.name" maxlength="255"
-               (blur)="listPagedResources('name')">
+               (keyup)="keyupFilter('name')">
         <button mat-icon-button matSuffix
                 [disabled]="!isTextInputValid(resource.name)"
                 (click)="clearInput('name')">
@@ -16,7 +16,7 @@
       <mat-form-field appearance="outline" style="width: 100%;">
         <mat-label for="cnh">CNH</mat-label>  
         <input matInput [imask]="cnhMask" [(ngModel)]="resource.cnh"
-               (blur)="listPagedResources('cnh')">
+               (keyup)="keyupFilter('cnh')">
         <button mat-icon-button matSuffix
                 [disabled]="!isTextInputValid(resource.cnh)"
                 (click)="clearInput('cnh')">
@@ -28,7 +28,7 @@
       <mat-form-field appearance="outline" style="width: 100%;">
         <mat-label for="cpf">CPF</mat-label>  
         <input matInput [imask]="cpfMask" [(ngModel)]="resource.cpf"
-               (blur)="listPagedResources('cpf')">
+               (keyup)="keyupFilter('cpf')">
         <button mat-icon-button matSuffix 
                 [disabled]="!isTextInputValid(resource.cpf)"
                 (click)="clearInput('cpf')">
