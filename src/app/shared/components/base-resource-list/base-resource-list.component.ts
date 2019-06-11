@@ -7,7 +7,7 @@ import { isNullOrUndefined, isDate } from 'util';
 
 export abstract class BaseResourceListComponent<T extends BaseResourceModel> implements OnInit {
 
-  resources: MatTableDataSource<T> = new MatTableDataSource<T>();  
+  resources: MatTableDataSource<T> = new MatTableDataSource<T>();
 
   constructor(private resourcesService: BaseResourceService<T>, public resource: T) { }
 
@@ -17,7 +17,9 @@ export abstract class BaseResourceListComponent<T extends BaseResourceModel> imp
 
   listResources(){
     this.resourcesService.getAll().subscribe(
-      resources => this.resources.data = resources,
+      resources => {
+        this.resources.data = resources;
+      },
       () => alert('Erro ao listar')
     )
   }
