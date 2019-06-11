@@ -19,11 +19,21 @@ export class DriverFilterComponent extends BaseResourceFilterComponent<Driver> {
     super(driverService, new Driver());
   }
 
+  keyupFilter(nameInput: string): void {
+    this.driverService.getAll().subscribe(
+      resources => {
+        this.resources.data = resources;
+        this.subject.next(nameInput);
+      },
+      () => alert('Erro ao listar')
+    )
+  }
+
   listPagedResources(nameInput: string): void {
     this.driverService.getAll().subscribe(
       resources => {
         this.resources.data = resources;
-        this.resultFilter(nameInput);
+        this.subject.next(nameInput);
       },
       () => alert('Erro ao listar')
     )
