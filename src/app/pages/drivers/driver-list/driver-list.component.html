@@ -12,40 +12,52 @@
 <table mat-table [dataSource]="resources" class="mat-elevation-z8" style="width: 100%;">
   <!-- name Column -->
   <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Motorista </th>
-    <td mat-cell *matCellDef="let obj"> {{ obj.name }} </td>
+    <th style="width: calc(35%);" mat-header-cell *matHeaderCellDef> Motorista </th>
+    <td style="width: calc(35%);" mat-cell *matCellDef="let obj"> {{ obj.name }} </td>
   </ng-container>
 
   <!-- dateOfBirth Column -->
   <ng-container matColumnDef="dateOfBirth">
-    <th mat-header-cell *matHeaderCellDef> Data nasc. </th>
-    <td mat-cell *matCellDef="let obj"> {{ obj.dateOfBirth | date: 'dd/MM/yyyy' }} </td>
+    <th style="max-width: 130px;" mat-header-cell *matHeaderCellDef> Data nasc. </th>
+    <td style="max-width: 130px;" mat-cell *matCellDef="let obj"> {{ obj.dateOfBirth | date: 'dd/MM/yyyy' }} </td>
   </ng-container>
 
   <!-- cnh Column -->
   <ng-container matColumnDef="cnh">
-    <th mat-header-cell *matHeaderCellDef> CNH </th>
-    <td mat-cell *matCellDef="let obj"> {{ obj.cnh }} </td>
+    <th style="width: 130px; margin-left: 15px;" mat-header-cell *matHeaderCellDef> CNH </th>
+    <td style="width: 130px; margin-left: 15px;" mat-cell *matCellDef="let obj"> {{ obj.cnh }} </td>
   </ng-container>
 
   <!-- cpf Column -->
   <ng-container matColumnDef="cpf">
-    <th mat-header-cell *matHeaderCellDef> CPF </th>
-    <td mat-cell *matCellDef="let obj"> {{ obj.cpf }} </td>
+    <th style="width: 130px;" mat-header-cell *matHeaderCellDef> CPF </th>
+    <td style="width: 130px;" mat-cell *matCellDef="let obj"> {{ obj.cpf }} </td>
   </ng-container>
 
   <!-- phone Column -->
   <ng-container matColumnDef="phone">
-    <th mat-header-cell *matHeaderCellDef> Phone </th>
-    <td mat-cell *matCellDef="let obj"> {{ obj.phone }} </td>
+    <th style="width: 130px;" mat-header-cell *matHeaderCellDef> Telefone </th>
+    <td style="width: 130px;" mat-cell *matCellDef="let obj"> {{ obj.phone }} </td>
   </ng-container>
 
   <!-- actions Column -->
   <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef> Ações </th>
-    <td mat-cell *matCellDef="let obj">
-      <a [routerLink]="['editar', obj.id]" class="btn btn-outline-info btn-sm mr-2">Editar</a>
-      <button (click)="deleteResource(obj)" class="btn btn-outline-danger btn-sm">Excluir</button>
+    <th style="width: 150px; text-align: center;" mat-header-cell *matHeaderCellDef> Ações </th>
+    <td style="width: 150px; text-align: center;" mat-cell *matCellDef="let obj">
+        <button mat-icon-button matSuffix
+                matTooltip="Editar motorista"
+                matTooltipPosition="above"
+                color="primary"
+                [routerLink]="['editar', obj.id]">
+            <mat-icon matSuffix>edit</mat-icon>
+        </button>
+        <button mat-icon-button matSuffix
+                matTooltip="Excluir motorista"
+                matTooltipPosition="above"
+                color="warn"
+                (click)="deleteResource(obj)">
+            <mat-icon matSuffix>delete_forever</mat-icon>
+        </button>
     </td>
   </ng-container>
 
