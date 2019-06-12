@@ -6,7 +6,8 @@ import { Product } from './pages/products/shared/product.model';
 export class InMemoryDatabase implements InMemoryDbService {
   createDb() {
     let drivers: Driver[] = [
-      { id: 1, name: 'João Paulo', dateOfBirth: new Date(1992, 9, 24), cnh: '2353423', cpf: '12345632112', phone: '62984994081' },
+      { id: 1, name: 'João Paulo', dateOfBirth: new Date(1992, 9, 24), cnh: '12345632112', cpf: '12345632112', phone: '62984994081' },
+      { id: 2, name: 'João Pedro', dateOfBirth: new Date(1990, 3, 9), cnh: '12345632112', cpf: '12345632112', phone: '62984994081' },
     ];
 
 
