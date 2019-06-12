@@ -30,7 +30,27 @@ export abstract class BaseResourceFilterComponent<T extends BaseResourceModel> i
 
   abstract resultFilter(nameInput: string): void;
 
-  listResources(): void {
+  protected keyupFilter(nameInput: string): void {
+    this.resourcesService.getAll().subscribe(
+      resources => {
+        this.resources.data = resources;
+        this.subject.next(nameInput);
+      },
+      () => alert('Erro ao listar')
+    )
+  }
+
+  protected listPagedResources(nameInput: string): void {
+    this.resourcesService.getAll().subscribe(
+      resources => {
+        this.resources.data = resources;
+        this.subject.next(nameInput);
+      },
+      () => alert('Erro ao listar')
+    )
+  }
+
+  protected listResources(): void {
     this.resourcesService.getAll().subscribe(
       resources => {
         this.resources.data = resources;
@@ -39,6 +59,19 @@ export abstract class BaseResourceFilterComponent<T extends BaseResourceModel> i
     )
   }
 
+  protected getNameMatIcon(value: string): string {
+    if(this.isTextInputValid(value)) {
+      return 'backspace';
+    }
+    return 'search';
+  }
+
+  protected getColorMatIconButton(value: string): string {
+    if(this.isTextInputValid(value)) {
+      return 'warn';
+    }
+    return '';
+  }
 
   protected isNullOrUndefined(obj: any): boolean {
     return isNullOrUndefined(obj);
@@ -58,10 +91,11 @@ export abstract class BaseResourceFilterComponent<T extends BaseResourceModel> i
     return null;
   }
 
-  protected clearInput(input: string): void {
-    if (this.isStringValid(input)) {
-      this.resource[input] = '';
+  protected clearInput(nameInput: string): void {
+    if (this.isStringValid(nameInput)) {
+      this.resource[nameInput] = '';
     }
+    this.listPagedResources(nameInput);
   }
 
   protected isTextInputValid(text: string): boolean {
