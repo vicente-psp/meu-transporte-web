@@ -4,6 +4,8 @@ import { IMaskModule } from 'angular-imask';
 
 import { SharedModule } from '../../shared/shared.module';
 
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+
 import { DriversRoutingModule } from './drivers-routing.module';
 import { DriverFormComponent } from './driver-form/driver-form.component';
 import { DriverListComponent } from './driver-list/driver-list.component';
@@ -28,6 +30,7 @@ export const DD_MM_YYYY_Format = {
     SharedModule,
     DriversRoutingModule,
     IMaskModule,
+    ConfirmDialogModule,
   ],
   declarations: [
     DriverFormComponent,
