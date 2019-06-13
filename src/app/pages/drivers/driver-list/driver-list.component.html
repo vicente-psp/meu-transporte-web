@@ -9,58 +9,76 @@
 
 <app-driver-filter *ngIf="showFilter" (changeResources)="changeResources($event)"></app-driver-filter>
 
-<table mat-table [dataSource]="resources" class="mat-elevation-z8" style="width: 100%;">
-  <!-- name Column -->
-  <ng-container matColumnDef="name">
-    <th style="width: calc(35%);" mat-header-cell *matHeaderCellDef> Motorista </th>
-    <td style="width: calc(35%);" mat-cell *matCellDef="let obj"> {{ obj.name }} </td>
-  </ng-container>
+<div class="mat-elevation-z8">
+  <!-- <p-paginator [rows]="10" [totalRecords]="120" [rowsPerPageOptions]="[10,20,30]"></p-paginator> -->
+  <!-- <mat-paginator [length]="getLength()"
+                  [pageSize]="driverService.pageSize"
+                  [pageSizeOptions]="driverService.pageSizeOptions"
+                  showFirstLastButtons
+                  (page)="pageEvent = $event">
+  </mat-paginator> -->
 
-  <!-- dateOfBirth Column -->
-  <ng-container matColumnDef="dateOfBirth">
-    <th style="max-width: 130px;" mat-header-cell *matHeaderCellDef> Data nasc. </th>
-    <td style="max-width: 130px;" mat-cell *matCellDef="let obj"> {{ obj.dateOfBirth | date: 'dd/MM/yyyy' }} </td>
-  </ng-container>
+  <table mat-table [dataSource]="resources" style="width: 100%;">
 
-  <!-- cnh Column -->
-  <ng-container matColumnDef="cnh">
-    <th style="width: 130px; margin-left: 15px;" mat-header-cell *matHeaderCellDef> CNH </th>
-    <td style="width: 130px; margin-left: 15px;" mat-cell *matCellDef="let obj"> {{ obj.cnh }} </td>
-  </ng-container>
+    <!-- name Column -->
+    <ng-container matColumnDef="name">
+      <th style="width: calc(35%);" mat-header-cell *matHeaderCellDef> Motorista </th>
+      <td style="width: calc(35%);" mat-cell *matCellDef="let obj"> {{ obj.name }} </td>
+    </ng-container>
 
-  <!-- cpf Column -->
-  <ng-container matColumnDef="cpf">
-    <th style="width: 130px;" mat-header-cell *matHeaderCellDef> CPF </th>
-    <td style="width: 130px;" mat-cell *matCellDef="let obj"> {{ obj.cpf }} </td>
-  </ng-container>
+    <!-- dateOfBirth Column -->
+    <ng-container matColumnDef="dateOfBirth">
+      <th style="max-width: 130px;" mat-header-cell *matHeaderCellDef> Data nasc. </th>
+      <td style="max-width: 130px;" mat-cell *matCellDef="let obj"> {{ obj.dateOfBirth | date: 'dd/MM/yyyy' }} </td>
+    </ng-container>
 
-  <!-- phone Column -->
-  <ng-container matColumnDef="phone">
-    <th style="width: 130px;" mat-header-cell *matHeaderCellDef> Telefone </th>
-    <td style="width: 130px;" mat-cell *matCellDef="let obj"> {{ obj.phone }} </td>
-  </ng-container>
+    <!-- cnh Column -->
+    <ng-container matColumnDef="cnh">
+      <th style="width: 130px; margin-left: 15px;" mat-header-cell *matHeaderCellDef> CNH </th>
+      <td style="width: 130px; margin-left: 15px;" mat-cell *matCellDef="let obj"> {{ obj.cnh }} </td>
+    </ng-container>
 
-  <!-- actions Column -->
-  <ng-container matColumnDef="actions">
-    <th style="width: 150px; text-align: center;" mat-header-cell *matHeaderCellDef> Ações </th>
-    <td style="width: 150px; text-align: center;" mat-cell *matCellDef="let obj">
-        <button mat-icon-button matSuffix
-                matTooltip="Editar motorista"
-                matTooltipPosition="above"
-                color="primary"
-                [routerLink]="['editar', obj.id]">
-            <mat-icon matSuffix>edit</mat-icon>
-        </button>
-        <button mat-icon-button matSuffix
-                matTooltip="Excluir motorista"
-                matTooltipPosition="above"
-                color="warn"
-                (click)="deleteResource(obj)">
-            <mat-icon matSuffix>delete_forever</mat-icon>
-        </button>
-    </td>
-  </ng-container>
+    <!-- cpf Column -->
+    <ng-container matColumnDef="cpf">
+      <th style="width: 130px;" mat-header-cell *matHeaderCellDef> CPF </th>
+      <td style="width: 130px;" mat-cell *matCellDef="let obj"> {{ obj.cpf }} </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+    <!-- phone Column -->
+    <ng-container matColumnDef="phone">
+      <th style="width: 130px;" mat-header-cell *matHeaderCellDef> Telefone </th>
+      <td style="width: 130px;" mat-cell *matCellDef="let obj"> {{ obj.phone }} </td>
+    </ng-container>
+
+    <!-- actions Column -->
+    <ng-container matColumnDef="actions">
+      <th style="width: 130px; text-align: center;" mat-header-cell *matHeaderCellDef> Ações </th>
+      <td style="width: 130px; text-align: center;" mat-cell *matCellDef="let obj">
+          <button mat-icon-button matSuffix
+                  matTooltip="Editar motorista"
+                  matTooltipPosition="above"
+                  color="primary"
+                  [routerLink]="['editar', obj.id]">
+              <mat-icon matSuffix>edit</mat-icon>
+          </button>
+          <button mat-icon-button matSuffix
+                  matTooltip="Excluir motorista"
+                  matTooltipPosition="above"
+                  color="warn"
+                  (click)="deleteResource(obj)">
+              <mat-icon matSuffix>delete_forever</mat-icon>
+          </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="element-row"></tr>
+  </table>
+</div>
+
+<p-confirmDialog #cd [style]="{width: '50vw'}">
+  <p-footer>
+    <button type="button" pButton icon="pi pi-check" class="ui-button-danger" label="Sim" (click)="cd.accept()"></button>
+    <button type="button" pButton icon="pi pi-times" label="Não" (click)="cd.reject()"></button>
+  </p-footer>
+</p-confirmDialog>
