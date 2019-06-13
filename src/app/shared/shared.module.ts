@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 // componentes do angular/material
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material';
+import { MatNativeDateModule, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,6 +17,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
+import { IMaskModule } from 'angular-imask';
+
 import { BreadCrumbComponent } from './components/bread-crumb/bread-crumb.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { FormFieldErrorComponent } from './components/form-field-error/form-field-error.component';
@@ -24,10 +26,9 @@ import { ServerErrorMessagesComponent } from './components/server-error-messages
 import { ButtonsGroupComponent } from './components/buttons-group/buttons-group.component';
 
 // componentes do primeng
-import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
-import { PanelModule } from 'primeng/panel';
-import { CardModule } from 'primeng/card';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+// import { PaginatorModule } from 'primeng/paginator';
+
 
 const material = [
   MatSidenavModule,
@@ -43,18 +44,32 @@ const material = [
   MatTooltipModule,
 ]
 
+const primeng = [
+  ConfirmDialogModule,
+]
+
+export const DD_MM_YYYY_Format = {
+  parse: {
+      dateInput: 'LL',
+  },
+  display: {
+      dateInput: 'DD/MM/YYYY',
+      monthYearLabel: 'MMM YYYY',
+      dateA11yLabel: 'LL',
+      monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
+
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     RouterModule,
-    ButtonModule,
-    InputTextModule,
-    PanelModule,
-    CardModule,
     FormsModule,
-    material
+    IMaskModule,
+    material,
+    primeng,
   ],
   declarations: [
     BreadCrumbComponent,
@@ -72,12 +87,14 @@ const material = [
     ButtonsGroupComponent,
     FormFieldErrorComponent,
     ServerErrorMessagesComponent,
-    ButtonModule,
-    InputTextModule,
-    PanelModule,
-    CardModule,
     FormsModule,
-    material
-  ]
+    IMaskModule,
+    material,
+    primeng,
+  ],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+    { provide: MAT_DATE_FORMATS, useValue: DD_MM_YYYY_Format }
+  ],
 })
 export class SharedModule { }
