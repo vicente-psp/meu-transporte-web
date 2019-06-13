@@ -1,0 +1,7 @@
+tr.element-row:hover {
+    background: rgb(219, 211, 211);
+}
+
+tr.element-row:active {
+    background: #efefef;
+}
