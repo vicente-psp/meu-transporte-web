@@ -9,7 +9,9 @@
           <mat-label for="name">Nome</mat-label>  
           <input matInput [(ngModel)]="resource.name" required maxlength="255">
           <button *ngIf="isTextInputValid(resource.name)"
-              mat-icon-button matSuffix (click)="clearInput('name')">
+                  mat-icon-button matSuffix
+                  color="warn"
+                  (click)="clearInput('name')">
             <mat-icon>backspace</mat-icon>
           </button>
         </mat-form-field>
@@ -35,7 +37,9 @@
           <mat-label for="cnh">CNH</mat-label>  
           <input matInput [imask]="cnhMask" [(ngModel)]="resource.cnh" required>
           <button *ngIf="isTextInputValid(resource.cnh)"
-              mat-icon-button matSuffix (click)="clearInput('cnh')">
+                  mat-icon-button matSuffix
+                  color="warn"
+                  (click)="clearInput('cnh')">
             <mat-icon>backspace</mat-icon>
           </button>
         </mat-form-field>
@@ -45,7 +49,9 @@
           <mat-label for="cpf">CPF</mat-label>  
           <input matInput [imask]="cpfMask" [(ngModel)]="resource.cpf" required>
           <button *ngIf="isTextInputValid(resource.cpf)"
-              mat-icon-button matSuffix (click)="clearInput('cpf')">
+                  mat-icon-button matSuffix
+                  color="warn"
+                  (click)="clearInput('cpf')">
             <mat-icon>backspace</mat-icon>
           </button>
         </mat-form-field>
@@ -55,7 +61,9 @@
           <mat-label for="phone">Telefone</mat-label>  
           <input matInput [imask]="phoneMask" [(ngModel)]="resource.phone" required>
           <button *ngIf="isTextInputValid(resource.phone)"
-              mat-icon-button matSuffix (click)="clearInput('phone')">
+                  mat-icon-button matSuffix
+                  color="warn"
+                  (click)="clearInput('phone')">
             <mat-icon>backspace</mat-icon>
           </button>
         </mat-form-field>
