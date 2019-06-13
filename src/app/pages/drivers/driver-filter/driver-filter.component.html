@@ -7,8 +7,9 @@
                (keyup)="keyupFilter('name')">
         <button mat-icon-button matSuffix
                 [disabled]="!isTextInputValid(resource.name)"
+                [color]="getColorMatIconButton(resource.name)"
                 (click)="clearInput('name')">
-            <mat-icon matSuffix>{{ getMatIcon(resource.name) }}</mat-icon>
+            <mat-icon matSuffix>{{ getNameMatIcon(resource.name) }}</mat-icon>
         </button>
       </mat-form-field>
     </div>
@@ -19,8 +20,9 @@
                (keyup)="keyupFilter('cnh')">
         <button mat-icon-button matSuffix
                 [disabled]="!isTextInputValid(resource.cnh)"
+                [color]="getColorMatIconButton(resource.cnh)"
                 (click)="clearInput('cnh')">
-            <mat-icon matSuffix>{{ getMatIcon(resource.cnh) }}</mat-icon>
+            <mat-icon matSuffix>{{ getNameMatIcon(resource.cnh) }}</mat-icon>
         </button>
       </mat-form-field>
     </div>
@@ -31,8 +33,9 @@
                (keyup)="keyupFilter('cpf')">
         <button mat-icon-button matSuffix 
                 [disabled]="!isTextInputValid(resource.cpf)"
+                [color]="getColorMatIconButton(resource.cpf)"
                 (click)="clearInput('cpf')">
-            <mat-icon matSuffix>{{ getMatIcon(resource.cpf) }}</mat-icon>
+            <mat-icon matSuffix>{{ getNameMatIcon(resource.cpf) }}</mat-icon>
         </button>
       </mat-form-field>
     </div>
