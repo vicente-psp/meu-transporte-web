@@ -24,17 +24,6 @@ export abstract class BaseResourceListComponent<T extends BaseResourceModel> imp
     )
   }
 
-  deleteResource(resource: T){
-    const confirmDelete = confirm('Deseja remover o registro?');
-
-    if (confirmDelete) {
-      this.resourcesService.delete(resource.id).subscribe(
-        () => this.listResources(),
-        () => alert('Erro ao remover registro')
-      )
-    }
-  }
-
   protected isNullOrUndefined(obj: any): boolean {
     return isNullOrUndefined(obj);
   }
