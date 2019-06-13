@@ -19,50 +19,16 @@ export class DriverFilterComponent extends BaseResourceFilterComponent<Driver> {
     super(driverService, new Driver());
   }
 
-  keyupFilter(nameInput: string): void {
-    this.driverService.getAll().subscribe(
-      resources => {
-        this.resources.data = resources;
-        this.subject.next(nameInput);
-      },
-      () => alert('Erro ao listar')
-    )
-  }
-
-  listPagedResources(nameInput: string): void {
-    this.driverService.getAll().subscribe(
-      resources => {
-        this.resources.data = resources;
-        this.subject.next(nameInput);
-      },
-      () => alert('Erro ao listar')
-    )
-  }
-
   resultFilter(nameInput: string): void {
     const value = this.resource[nameInput];
-    this.resource = new Driver();
-    this.resources.data = this.resources.data.filter((element: Driver) => {
-      return element[nameInput].toUpperCase().indexOf(value.toUpperCase()) !== -1;
-    });
-    this.resource[nameInput] = value;
-    this.changeResources.emit(this.resources.data);
-  }
-
-  getMatIcon(value: string): string {
-    if(this.isTextInputValid(value)) {
-      return 'backspace';
+    if (!this.isNullOrUndefined(this.resource[nameInput])) {
+      this.resource = new Driver();
+      this.resources.data = this.resources.data.filter((element: Driver) => {
+        return element[nameInput].toUpperCase().indexOf(value.toUpperCase()) !== -1;
+      });
+      this.resource[nameInput] = value;
+      this.changeResources.emit(this.resources.data);
     }
-    return 'search';
-  }
-
-
-
-  protected clearInput(nameInput: string): void {
-    if (this.isStringValid(nameInput)) {
-      this.resource[nameInput] = '';
-    }
-    this.listPagedResources(nameInput);
   }
 
 }
