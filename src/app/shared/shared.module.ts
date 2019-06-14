@@ -27,7 +27,13 @@ import { ButtonsGroupComponent } from './components/buttons-group/buttons-group.
 
 // componentes do primeng
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-// import { PaginatorModule } from 'primeng/paginator';
+import { DialogModule } from 'primeng/dialog';
+import { CardModule } from 'primeng/card';
+import { TableModule } from 'primeng/table';
+import { InputMaskModule } from 'primeng/inputmask';
+import { InputTextModule } from 'primeng/inputtext';
+import { CalendarModule } from 'primeng/calendar';
+import { PaginatorModule } from 'primeng/paginator';
 
 
 const material = [
@@ -46,6 +52,13 @@ const material = [
 
 const primeng = [
   ConfirmDialogModule,
+  DialogModule,
+  CardModule,
+  TableModule,
+  InputMaskModule,
+  InputTextModule,
+  CalendarModule,
+  PaginatorModule,
 ]
 
 export const DD_MM_YYYY_Format = {
