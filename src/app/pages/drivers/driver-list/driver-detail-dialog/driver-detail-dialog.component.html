@@ -1,6 +1,6 @@
 <p-dialog [header]="getHeader()" [(visible)]="display" 
         [modal]="true" [responsive]="true" [minY]="70"
-        [contentStyle]="{'min-width':'500px'}"
+        [contentStyle]="{'min-width':'400px'}"
         (onHide)="onHide()"
         [maximizable]="true" [baseZIndex]="10000">
 
@@ -12,22 +12,30 @@
             <label for="float-input">ID</label>
         </span>
       </div>
-      <div class="col-md-7">
+    </div>
+    <div class="row mt-4">
+      <div class="col-md-10">
         <span class="ui-float-label">
             <input id="float-input" readonly disabled [value]="driver.name" style="width: 100%" pInputText> 
             <label for="float-input">Nome</label>
         </span>
       </div>
-      <div class="col-md-3">
-          <span class="ui-float-label">
-              <input id="float-input" readonly disabled [value]="getFormatedDate(driver.dateOfBirth)" style="width: 100%" pInputText> 
-              <label for="float-input">Nascimento</label>
-          </span>
+      <div class="col-md-2">
+        <span class="ui-float-label">
+            <input id="float-input" readonly disabled [value]="getGenderText()" style="width: 100%" pInputText> 
+            <label for="float-input">Sexo</label>
+        </span>
       </div>
     </div>
     
     <div class="row mt-4">
-      <div class="col-md-4">
+      <div class="col-md-3">
+          <span class="ui-float-label">
+              <input id="float-input" readonly disabled [value]="getFormatedDate(driver.dateOfBirth)" style="width: 100%" pInputText> 
+              <label for="float-input">Dt. Nascimento</label>
+          </span>
+      </div>
+      <div class="col-md-3">
         <span class="ui-float-label">
             <p-inputMask id="float-input"
                          mask="999.999.999-99"
@@ -40,13 +48,13 @@
             <label for="float-input">CPF</label>
         </span>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-3">
           <span class="ui-float-label">
               <input id="float-input" readonly disabled [value]="driver.cnh" style="width: 100%" pInputText> 
               <label for="float-input">CNH</label>
           </span>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-3">
         <span class="ui-float-label">
             <p-inputMask id="float-input"
                          mask="(99)99999-9999"
