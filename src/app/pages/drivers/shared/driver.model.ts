@@ -7,7 +7,8 @@ export class Driver extends BaseResourceModel {
         public name?: string,
         public cnh?: string,
         public cpf?: string,
-        public phone?: string
+        public phone?: string,
+        public gender?: string,
     ){
         super();
     }
