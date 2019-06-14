@@ -6,7 +6,7 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-driver-detail-dialog',
   templateUrl: './driver-detail-dialog.component.html',
-  styleUrls: ['./driver-detail-dialog.component.css']
+  styles: []
 })
 export class DriverDetailDialogComponent implements OnInit, OnDestroy {
 
