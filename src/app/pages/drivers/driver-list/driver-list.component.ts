@@ -18,15 +18,37 @@ import { DriverService } from '../shared/driver.service';
 })
 export class DriverListComponent extends BaseResourceListComponent<Driver> {
 
-  showFilter: boolean = false;
-  public displayedColumns = ['name', 'dateOfBirth', 'cnh', 'cpf', 'phone', 'actions'];
+  public showFilter: boolean = false;
+  public display: boolean = false;
+  public scrollHeight = '300px';
+  public resourceDialog: Driver = new Driver();
 
 
+  cols = [
+    { field: 'name', header: 'Nome', width: '30em' },
+    { field: 'dateOfBirth', header: 'Nascimento', width: '7em' },
+    { field: 'cnh', header: 'CNH', width: '8em' },
+  ];
+
+  
   constructor(private driverService: DriverService,
               private confirmationService: ConfirmationService) {
     super(driverService, new Driver());
   }
-  
+
+
+  isDateColumn(obj): boolean {
+    return obj === 'dateOfBirth';
+  }
+
+  displayChange(event): void {
+    this.display = event;
+  }
+
+  showDialog(obj: Driver) {
+    this.resourceDialog = obj;
+    this.display = true;
+  }
 
   changeResources(event) {
     this.resources.data = event;
@@ -34,6 +56,11 @@ export class DriverListComponent extends BaseResourceListComponent<Driver> {
 
   setShowFilter(event): void {
     this.showFilter = event;
+    if (event) {
+      this.scrollHeight = '250px';
+    } else {
+      this.scrollHeight = '300px';
+    }
   }
 
   getLength(): number {
