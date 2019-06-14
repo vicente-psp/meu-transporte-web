@@ -41,7 +41,13 @@ export class DriverDetailDialogComponent implements OnInit, OnDestroy {
   }
 
   getHeader(): string {
-    return 'Detalhes do registro ' + this.driver.name;
+    const textValue = 'Detalhes ' + (this.driver.gender === 'M' ? 'do motorista ' : 'da motorista ') + this.driver.name;
+    return textValue;
+  }
+
+  getGenderText(): string {
+    const textValue = this.driver.gender === 'M' ? 'Masculino' : 'Feminino';
+    return textValue;
   }
 
 }
