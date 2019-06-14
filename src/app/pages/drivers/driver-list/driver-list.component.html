@@ -10,8 +10,6 @@
 
 <app-driver-filter *ngIf="showFilter" (changeResources)="changeResources($event)"></app-driver-filter>
 
-  <!-- <p-paginator [rows]="10" [totalRecords]="120" [rowsPerPageOptions]="[10,20,30]"></p-paginator> -->
-
 
   <p-table [columns]="cols" [value]="resources.data"
          [responsive]="true" [scrollable]="true" [scrollHeight]="scrollHeight">
@@ -34,6 +32,7 @@
               <button mat-icon-button matSuffix
                       matTooltip="Detalhes do motorista"
                       matTooltipPosition="above"
+                      color="primary"
                       (click)="showDialog(obj)">
                   <mat-icon matSuffix>info</mat-icon>
               </button>
@@ -55,9 +54,6 @@
         </tr>
     </ng-template>
 </p-table>
-
-
-
 
 <p-confirmDialog #cd [style]="{width: '50vw'}">
   <p-footer>

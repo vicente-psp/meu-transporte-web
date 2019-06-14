@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Driver } from '../../shared/driver.model';
 import { isNullOrUndefined } from 'util';
 import * as moment from 'moment';
@@ -8,7 +8,7 @@ import * as moment from 'moment';
   templateUrl: './driver-detail-dialog.component.html',
   styles: []
 })
-export class DriverDetailDialogComponent implements OnInit, OnDestroy {
+export class DriverDetailDialogComponent implements OnInit{
 
   @Input() driver: Driver = new Driver();
   @Input() display = false;
@@ -18,10 +18,6 @@ export class DriverDetailDialogComponent implements OnInit, OnDestroy {
   constructor() { }
 
   ngOnInit() {
-  }
-
-  ngOnDestroy(): void {
-    console.log('destroy');
   }
 
   onHide() {
