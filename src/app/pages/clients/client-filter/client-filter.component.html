@@ -1,0 +1,30 @@
+<mat-drawer-container style="width: 100%;">
+  <div class="row" style="margin-left: 10px; margin-right: 10px; margin-top: 15px;">
+    <div class="col-md-8">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label for="socialName">Razão social</mat-label>  
+        <input matInput [(ngModel)]="resource.socialName" maxlength="255"
+               (keyup)="keyupFilter('socialName')">
+        <button mat-icon-button matSuffix
+                [disabled]="!isTextInputValid(resource.socialName)"
+                [color]="getColorMatIconButton(resource.socialName)"
+                (click)="clearInput('socialName')">
+            <mat-icon matSuffix>{{ getNameMatIcon(resource.socialName) }}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="col-md-4">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label for="cnpj">CNPJ</mat-label>  
+        <input matInput [imask]="cnpjMask" [(ngModel)]="resource.cnpj"
+               (keyup)="keyupFilter('cnpj')">
+        <button mat-icon-button matSuffix
+                [disabled]="!isTextInputValid(resource.cnpj)"
+                [color]="getColorMatIconButton(resource.cnpj)"
+                (click)="clearInput('cnpj')">
+            <mat-icon matSuffix>{{ getNameMatIcon(resource.cnpj) }}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  </div>
+</mat-drawer-container>
