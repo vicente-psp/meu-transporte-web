@@ -1,0 +1,63 @@
+<p-dialog [header]="getHeader()" [(visible)]="display" 
+        [modal]="true" [responsive]="true" [minY]="70"
+        [contentStyle]="{'min-width':'400px'}"
+        (onHide)="onHide()"
+        [maximizable]="true" [baseZIndex]="10000">
+
+  <div class="col-md">
+    <div class="row mt-4">
+      <div class="col-md-3">
+        <span class="ui-float-label">
+            <input id="float-input-id" readonly disabled [value]="client.id" style="width: 100%" pInputText> 
+            <label for="float-input-id">ID</label>
+        </span>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md-8">
+        <span class="ui-float-label">
+            <input id="float-input-name" readonly disabled [value]="client.socialName" style="width: 100%" pInputText> 
+            <label for="float-input-name">Razão social</label>
+        </span>
+      </div>
+      <div class="col-md-4">
+        <span class="ui-float-label">
+            <input id="float-input-fantasy" readonly disabled [value]="client.nameFantasy" style="width: 100%" pInputText> 
+            <label for="float-input-fantasy">Nome fantasia</label>
+        </span>
+      </div>
+    </div>
+    
+    <div class="row mt-4">      
+      <div class="col-md-6">
+        <span class="ui-float-label">
+            <p-inputMask id="float-input-cnpj"
+                         mask="99.999.999/9999-99"
+                         [style]="{'width':'100%'}"
+                         [(ngModel)]="client.cnpj"
+                         readonly
+                         disabled>
+              </p-inputMask>
+            <label for="float-input-cnpj">CNPJ</label>
+        </span>
+      </div>
+      <div class="col-md-6">
+        <span class="ui-float-label">
+            <p-inputMask id="float-input-phone"
+                         mask="(99)99999-9999"
+                         [style]="{'width':'100%'}"
+                         [(ngModel)]="client.phone"
+                         readonly
+                         disabled>
+              </p-inputMask>
+            <label for="float-input-phone">Telefone</label>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <p-footer>
+    <button type="button" pButton icon="pi pi-check" (click)="closeDetail()" label="Fechar"></button>
+  </p-footer>
+       
+</p-dialog>
