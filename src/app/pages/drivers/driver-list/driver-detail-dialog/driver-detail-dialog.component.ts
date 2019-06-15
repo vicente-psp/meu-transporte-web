@@ -1,7 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Driver } from '../../shared/driver.model';
+
 import { isNullOrUndefined } from 'util';
 import * as moment from 'moment';
+
+import { Driver } from '../../shared/driver.model';
+
 
 @Component({
   selector: 'app-driver-detail-dialog',
