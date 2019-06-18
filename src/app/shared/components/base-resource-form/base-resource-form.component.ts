@@ -81,7 +81,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
         }
     }
 
-    protected createResource(): void {      
+    protected createResource(): void {
         this.resourceService.create(this.resource).subscribe(
             resource => this.actionsForSuccess(resource),
             error => this.actionsForError(error)
@@ -101,7 +101,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
 
         const baseComponentPath: string = this.route.snapshot.parent.url[0].path;
         this.router.navigateByUrl(baseComponentPath, { skipLocationChange: true }).then(
-            () => this.router.navigate([baseComponentPath, 'editar', resource.id])
+            () => this.router.navigate([baseComponentPath, 'editar', resource.idUser])
         )
     }
 
