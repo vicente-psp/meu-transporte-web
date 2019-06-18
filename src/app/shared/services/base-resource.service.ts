@@ -1,6 +1,6 @@
 import { BaseResourceModel } from "../models/base-resource.model";
 import { Injector } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
@@ -9,12 +9,13 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
 
     protected httpClient: HttpClient;
 
-    private API_ENDPOINT = 'api/';
+    private API_ENDPOINT = 'http://localhost:8080/';
 
     constructor(
         protected apiPath: string,
         protected injector: Injector,
-        protected jsonDataToResoursefn: (jsonData: any) => T
+        protected jsonDataToResoursefn: (jsonData: any) => T,
+        protected nameList: string
     ) {
         this.httpClient = injector.get(HttpClient);
     }
@@ -51,7 +52,10 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
     
 
     getAll(): Observable<T[]> {
-        return this.httpClient.get(this.endPoint).pipe(
+        const headers = new HttpHeaders({
+            'Content-Type' : 'application/json'
+        });
+        return this.httpClient.get(this.endPoint, {headers: headers}).pipe(
             map(this.jsonDataToResources.bind(this)),
             catchError(this.handleError)
         )
@@ -90,9 +94,9 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
     }
 
 
-    protected jsonDataToResources(jsonData: any[]): T[] {
+    protected jsonDataToResources(jsonData: any): T[] {
         const resources: T[] = [];
-        jsonData.forEach(element => resources.push(this.jsonDataToResoursefn(element)));
+        jsonData._embedded[this.nameList].forEach(element => resources.push(this.jsonDataToResoursefn(element)));
         return resources;
     }
 
