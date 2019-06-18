@@ -15,7 +15,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDatabase),
+    // HttpClientInMemoryWebApiModule.forRoot(InMemoryDatabase),
     RouterModule
   ],
   declarations: [
