@@ -9,10 +9,7 @@ import { Driver } from './driver.model';
 })
 export class DriverService extends BaseResourceService<Driver> {
 
-  public pageSize = 10;
-  public pageSizeOptions: number[] = [5, 10, 25, 100];
-
   constructor(protected injector: Injector) {
-    super('drivers', injector, Driver.fromJson);
+    super('drivers', injector, Driver.fromJson, 'driverList');
   }
 }
