@@ -21,6 +21,7 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
     }
 
     get endPoint(): string {
+        console.log(this.API_ENDPOINT);
         return this.API_ENDPOINT + this.apiPath;
     }
 
@@ -55,6 +56,7 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
         const headers = new HttpHeaders({
             'Content-Type' : 'application/json'
         });
+        console.log(this.endPoint);
         return this.httpClient.get(this.endPoint, {headers: headers}).pipe(
             map(this.jsonDataToResources.bind(this)),
             catchError(this.handleError)
