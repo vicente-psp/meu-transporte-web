@@ -16,6 +16,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDividerModule } from '@angular/material/divider';
 
 import { IMaskModule } from 'angular-imask';
 
@@ -48,6 +50,8 @@ const material = [
   MatPaginatorModule,
   MatTableModule,
   MatTooltipModule,
+  MatSelectModule,
+  MatDividerModule,
 ]
 
 const primeng = [
