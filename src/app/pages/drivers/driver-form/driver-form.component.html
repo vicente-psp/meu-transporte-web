@@ -2,73 +2,162 @@
   [itens]="[{text: 'Motoristas', link: '/motoristas'}, {text: pageTitle}]"
 ></app-bread-crumb>
 
+
 <mat-drawer-container style="width: 100%;">
-    <div class="row" style="margin-left: 10px; margin-right: 10px; margin-top: 15px;">
-      <div class="col-md-12">
-        <mat-form-field appearance="outline" style="width: 100%;">
-          <mat-label for="name">Nome</mat-label>  
-          <input matInput [(ngModel)]="resource.name" required maxlength="255">
-          <button *ngIf="isTextInputValid(resource.name)"
-                  mat-icon-button matSuffix
-                  color="warn"
-                  (click)="clearInput('name')">
-            <mat-icon>backspace</mat-icon>
-          </button>
-        </mat-form-field>
-      </div>
+  <div class="row" style="margin-left: 10px; margin-right: 10px; margin-top: 15px;">
+    <div class="col-md-12">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label for="name">Nome</mat-label>  
+        <input matInput [(ngModel)]="resource.name" required maxlength="255">
+        <button *ngIf="isTextInputValid(resource.name)"
+                mat-icon-button matSuffix
+                color="warn"
+                (click)="clearInput('name')">
+          <mat-icon>backspace</mat-icon>
+        </button>
+      </mat-form-field>
     </div>
+  </div>
 
-    <div class="row" style="margin-left: 10px; margin-right: 10px;">
-      <div class="col-md-3">
-        <mat-form-field appearance="outline" style="width: 100%;">
-          <mat-label for="dateOfBirth">Data nascimento</mat-label> 
-          <input matInput [(ngModel)]="resource.dateOfBirth"
-            (change)="convertToDate($event)"
-            (keyup)="keyupClick($event)"
-            [max]="maxDate" [matDatepicker]="picker"
-            required maxlength="10">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-      </div>
-
-      <div class="col-md-3">
-        <mat-form-field appearance="outline" style="width: 100%;">
-          <mat-label for="cnh">CNH</mat-label>  
-          <input matInput [imask]="cnhMask" [(ngModel)]="resource.cnh" required>
-          <button *ngIf="isTextInputValid(resource.cnh)"
-                  mat-icon-button matSuffix
-                  color="warn"
-                  (click)="clearInput('cnh')">
-            <mat-icon>backspace</mat-icon>
-          </button>
-        </mat-form-field>
-      </div>
-      <div class="col-md-3">
-        <mat-form-field appearance="outline" style="width: 100%;">
-          <mat-label for="cpf">CPF</mat-label>  
-          <input matInput [imask]="cpfMask" [(ngModel)]="resource.cpf" required>
-          <button *ngIf="isTextInputValid(resource.cpf)"
-                  mat-icon-button matSuffix
-                  color="warn"
-                  (click)="clearInput('cpf')">
-            <mat-icon>backspace</mat-icon>
-          </button>
-        </mat-form-field>
-      </div>
-      <div class="col-md-3">
-        <mat-form-field appearance="outline" style="width: 100%;">
-          <mat-label for="phone">Telefone</mat-label>  
-          <input matInput [imask]="phoneMask" [(ngModel)]="resource.phone" required>
-          <button *ngIf="isTextInputValid(resource.phone)"
-                  mat-icon-button matSuffix
-                  color="warn"
-                  (click)="clearInput('phone')">
-            <mat-icon>backspace</mat-icon>
-          </button>
-        </mat-form-field>
-      </div>
+  <div class="row" style="margin-left: 10px; margin-right: 10px; margin-top: 0px;">
+    <div class="col-md-3">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Sexo</mat-label>
+        <mat-select [(ngModel)]="resource.gender" required>
+          <mat-option *ngFor="let obj of listGender" [value]="obj.value">
+            {{ obj.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
+    <div class="col-md-3">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label for="dateOfBirth">Data nascimento</mat-label> 
+        <input matInput [(ngModel)]="resource.dateOfBirth"
+          (change)="convertToDate($event)"
+          (keyup)="keyupClick($event)"
+          [max]="maxDate" [matDatepicker]="pickerDateOfBirth"
+          required maxlength="10">
+        <mat-datepicker-toggle matSuffix [for]="pickerDateOfBirth"></mat-datepicker-toggle>
+        <mat-datepicker #pickerDateOfBirth></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="col-md-3">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label for="cpf">CPF</mat-label>  
+        <input matInput [imask]="cpfMask" [(ngModel)]="resource.cpf" required>
+        <button *ngIf="isTextInputValid(resource.cpf)"
+                mat-icon-button matSuffix
+                color="warn"
+                (click)="clearInput('cpf')">
+          <mat-icon>backspace</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="col-md-3">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label for="phone">Telefone</mat-label>  
+        <input matInput [imask]="phoneMask" [(ngModel)]="resource.phone" required>
+        <button *ngIf="isTextInputValid(resource.phone)"
+                mat-icon-button matSuffix
+                color="warn"
+                (click)="clearInput('phone')">
+          <mat-icon>backspace</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row" style="margin-left: 10px; margin-right: 10px;">
+    <div class="col-md-3">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label for="cnh">CNH</mat-label>  
+        <input matInput [imask]="cnhMask" [(ngModel)]="resource.cnh" required>
+        <button *ngIf="isTextInputValid(resource.cnh)"
+                mat-icon-button matSuffix
+                color="warn"
+                (click)="clearInput('cnh')">
+          <mat-icon>backspace</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="col-md-3">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Categoria</mat-label>
+        <mat-select [(ngModel)]="resource.cnhCategory" required>
+          <mat-option *ngFor="let obj of listCnhCategory" [value]="obj.value">
+            {{ obj.value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-md-3">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label for="firstDateCnh">Primeira CNH</mat-label> 
+        <input matInput [(ngModel)]="resource.firstDateCnh"
+          (change)="convertToDate($event)"
+          (keyup)="keyupClick($event)"
+          [matDatepicker]="pickerFirstCnh"
+          required maxlength="10">
+        <mat-datepicker-toggle matSuffix [for]="pickerFirstCnh"></mat-datepicker-toggle>
+        <mat-datepicker #pickerFirstCnh></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="col-md-3">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label for="validityOfCnh">Validade CNH</mat-label> 
+        <input matInput [(ngModel)]="resource.validityOfCnh"
+          (change)="convertToDate($event)"
+          (keyup)="keyupClick($event)"
+          [matDatepicker]="pickerValidadeCnh"
+          required maxlength="10">
+        <mat-datepicker-toggle matSuffix [for]="pickerValidadeCnh"></mat-datepicker-toggle>
+        <mat-datepicker #pickerValidadeCnh></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+</mat-drawer-container>
+
+<mat-divider></mat-divider>
+
+<mat-drawer-container style="width: 100%;">
+  <div class="row" style="margin-left: 10px; margin-right: 10px; margin-top: 15px;">
+    <div class="col-md-6">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label for="userName">Nome de usuário</mat-label>  
+        <input matInput [(ngModel)]="resource.userName" required maxlength="255">
+        <button *ngIf="isTextInputValid(resource.userName)"
+                mat-icon-button matSuffix
+                color="warn"
+                (click)="clearInput('userName')">
+          <mat-icon>backspace</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="col-md-3">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label for="password">Senha</mat-label>  
+        <input [type]="typePassword ? 'password' : 'text'" matInput [(ngModel)]="resource.password" required maxlength="255">
+        <button *ngIf="isTextInputValid(resource.password)"
+                mat-icon-button matSuffix
+                (click)="changePassword()">
+          <mat-icon>{{ passwordMatIcon() }}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="col-md-3">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label for="passwordRepeat">Repetir senha</mat-label>  
+        <input [type]="typePasswordRepeat ? 'password' : 'text'" matInput [(ngModel)]="passwordRepeat" required maxlength="255">
+        <button *ngIf="isTextInputValid(passwordRepeat)"
+          mat-icon-button matSuffix
+          (click)="changePasswordRepeat()">
+          <mat-icon>{{ passwordRepeatMatIcon() }}</mat-icon>
+        </button>
+      </mat-form-field>
+      <span *ngIf="isShowErrorMessages()" style="color: #ff303a;">Senha não confere</span>
+    </div>
+  </div>
 </mat-drawer-container>
 
 <button mat-raised-button type="button"
@@ -78,14 +167,8 @@
   Voltar
 </button>
 <button mat-raised-button type="button" style="margin-right: 15px;"
-  class="mt-2 float-right" [color]="'primary'" (click)="salvar()"
+  class="mt-2 float-right" [color]="'primary'" (click)="salvarDriver()"
   [disabled]="!isValidResource()">
   <mat-icon>check</mat-icon>
   Salvar
 </button>
-
-
-<!-- <app-buttons-group
-  back-button-link="'/motoristas'"
-  save-button-disabled="!isValidResource()"
-  (clickButtonSave)="salvar()"></app-buttons-group> -->
