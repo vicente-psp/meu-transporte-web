@@ -75,7 +75,7 @@ export class DriverListComponent extends BaseResourceListComponent<Driver> {
         acceptLabel: 'Sim',
         rejectLabel: 'Não',
         accept: () => {
-          this.driverService.delete(obj.id).subscribe(
+          this.driverService.delete(obj.idUser).subscribe(
             () => this.listResources(),
             () => alert('Erro ao remover motorista')
           )
