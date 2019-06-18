@@ -9,7 +9,7 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
 
     protected httpClient: HttpClient;
 
-    private API_ENDPOINT = 'http://localhost:8080/';
+    private API_ENDPOINT = 'meu-transporte.us-east-2.elasticbeanstalk.com/';
 
     constructor(
         protected apiPath: string,
@@ -78,7 +78,7 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
     }
 
     update(resource: T): Observable<T> {
-        const url = `${this.endPoint}/${resource.id}`;
+        const url = `${this.endPoint}/${resource.idUser}`;
         return this.httpClient.put(url, resource).pipe(
             map(() => resource),
             catchError(this.handleError)
