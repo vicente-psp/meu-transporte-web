@@ -4,15 +4,16 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { isNullOrUndefined } from "util";
 
 export abstract class BaseResourceService<T extends BaseResourceModel> {
 
     protected httpClient: HttpClient;
 
-    private API_ENDPOINT = 'meu-transporte.us-east-2.elasticbeanstalk.com/';
+    private API_ENDPOINT = 'http://meu-transporte.us-east-2.elasticbeanstalk.com/';
 
     constructor(
-        protected apiPath: string,
+        protected resourcePath: string,
         protected injector: Injector,
         protected jsonDataToResoursefn: (jsonData: any) => T,
         protected nameList: string
@@ -21,21 +22,16 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
     }
 
     get endPoint(): string {
-        console.log(this.API_ENDPOINT);
-        return this.API_ENDPOINT + this.apiPath;
+        return this.API_ENDPOINT + this.resourcePath;
+    }
+
+    get headers(): HttpHeaders {
+        return new HttpHeaders({
+            'Content-Type' : 'application/json'
+        });
     }
 
 
-    // https://stackoverflow.com/questions/45210406/angular-4-3-httpclient-set-params
-    getCountries(data: any) {
-        // We don't need any more these lines
-        // let httpParams = new HttpParams();
-        // Object.keys(data).forEach(function (key) {
-        //     httpParams = httpParams.append(key, data[key]);
-        // });
-    
-        return this.httpClient.get("/api/countries", {params: data})
-    }
     getPagedList(filtro: any): Observable<T[]> {
         let httpParams: HttpParams = new HttpParams();
 
@@ -53,11 +49,7 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
     
 
     getAll(): Observable<T[]> {
-        const headers = new HttpHeaders({
-            'Content-Type' : 'application/json'
-        });
-        console.log(this.endPoint);
-        return this.httpClient.get(this.endPoint, {headers: headers}).pipe(
+        return this.httpClient.get(this.endPoint, {headers: this.headers}).pipe(
             map(this.jsonDataToResources.bind(this)),
             catchError(this.handleError)
         )
@@ -66,7 +58,7 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
     getById(id: number): Observable<T> {
         const url = `${this.endPoint}/${id}`;
 
-        return this.httpClient.get(url).pipe(
+        return this.httpClient.get(url, {headers: this.headers}).pipe(
             map(this.jsonDataToResource.bind(this)),
             catchError(this.handleError)
         )
@@ -98,7 +90,11 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
 
     protected jsonDataToResources(jsonData: any): T[] {
         const resources: T[] = [];
-        jsonData._embedded[this.nameList].forEach(element => resources.push(this.jsonDataToResoursefn(element)));
+        if (!isNullOrUndefined(jsonData._embedded) && !isNullOrUndefined(jsonData._embedded[this.nameList])) {
+            jsonData._embedded[this.nameList].forEach(element => {
+                resources.push(this.jsonDataToResoursefn(element));
+            });
+        }
         return resources;
     }
 
