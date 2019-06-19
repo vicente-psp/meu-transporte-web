@@ -18,7 +18,6 @@ export abstract class BaseResourceListComponent<T extends BaseResourceModel> imp
   listResources(){
     this.resourcesService.getAll().subscribe(
       resources => {
-        console.log(resources);
         this.resources.data = resources;
       },
       () => alert('Erro ao listar')

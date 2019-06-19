@@ -62,7 +62,9 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     protected loadResource(): void {
         if (this.currentAction === 'editar') {
             this.route.paramMap.pipe(
-                switchMap(params => this.resourceService.getById(+params.get('id')))
+                switchMap(params => {
+                    return this.resourceService.getById(+params.get('id'));
+                })
             )
                 .subscribe(
                     (resource) => {
