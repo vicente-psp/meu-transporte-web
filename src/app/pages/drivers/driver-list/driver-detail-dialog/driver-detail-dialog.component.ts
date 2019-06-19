@@ -39,13 +39,13 @@ export class DriverDetailDialogComponent implements OnInit{
     return moment(dateValue).format('DD/MM/YYYY');
   }
 
-  getHeader(): string {
-    const textValue = 'Detalhes ' + (this.driver.gender === 'M' ? 'do motorista ' : 'da motorista ') + this.driver.name;
+  get header(): string {
+    const textValue = 'Detalhes ' + (this.driver.gender === 'MALE' ? 'do motorista ' : 'da motorista ') + this.driver.name;
     return textValue;
   }
 
-  getGenderText(): string {
-    const textValue = this.driver.gender === 'M' ? 'Masculino' : 'Feminino';
+  get gender(): string {
+    const textValue = this.driver.gender === 'MALE' ? 'Masculino' : 'Feminino';
     return textValue;
   }
 
