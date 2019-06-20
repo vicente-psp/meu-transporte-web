@@ -39,8 +39,6 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
             httpParams = httpParams.append(element, filtro[element]);
         });
 
-        console.log(httpParams);
-
         return this.httpClient.get(this.endPoint + '/paged-list', {params: httpParams}).pipe(
             map(this.jsonDataToResources.bind(this)),
             catchError(this.handleError)
@@ -72,8 +70,7 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
     }
 
     update(resource: T): Observable<T> {
-        const url = `${this.endPoint}/${resource.idUser}`;
-        return this.httpClient.put(url, resource).pipe(
+        return this.httpClient.put(this.endPoint, resource).pipe(
             map(() => resource),
             catchError(this.handleError)
         )
@@ -81,7 +78,7 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
 
     delete(id: number): Observable<any> {
         const url = `${this.endPoint}/${id}`;
-        return this.httpClient.delete(url).pipe(
+        return this.httpClient.delete(url, {headers: this.headers}).pipe(
             map(() => null),
             catchError(this.handleError)
         )
